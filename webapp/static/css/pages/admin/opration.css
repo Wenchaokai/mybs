@@ -1,0 +1,64 @@
+.customer-select{
+    border:1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f7f7f9;
+}
+.customer-select ul{
+    margin: 0px;
+}
+.customer-select li{
+    width:200px;
+    height:23px;
+    float: left;
+    list-style: none;
+    padding-left: 10px;
+}
+.mod-password-update .btn,
+.mod-add-member .btn{
+    padding: 10px 40px;
+    margin-right: 20px;
+}
+.mod-add-member .control-group-fixed{
+    margin-bottom: 4px;
+}
+
+.mod-add-member  .controls{
+    margin-left: 108px;
+}
+.mod-add-member  .field-value{
+    line-height: 20px;
+    padding-top: 5px;
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+.mod-add-member  .field-value .item{
+    padding-right: 30px;
+}
+.mod-add-member .control-label{
+    width:90px;
+    text-align: left;
+    padding-left: 10px;
+}
+.mod-add-member .control-group-fixed .control-label{
+    width:300px;
+
+}
+.mod-password-update   .control-label{
+    width:400px;
+}
+.mod-password-update  .controls{
+    margin-left: 410px;
+}
+.mod-password-update .form-horizontal{
+    margin-top: 20px;
+}
+.mod-password-update .control-group{
+    margin-bottom: 24px;
+}
+.mod-password-update .hide{
+    display: none;
+}
+

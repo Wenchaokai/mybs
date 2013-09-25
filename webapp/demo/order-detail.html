@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>订单详情</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/pages/order-detail.css">
+    <script src="../static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">方健华</span>&nbsp;&nbsp;<a href="./user-manage.html" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="./loginout.html" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="./index.html"><img src="../static/img/logo.jpg" /></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="">
+                                        <a href="./index.html" target="_self">首页</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="./order-index.html" target="_self">我要查订单</a>
+                                    </li>
+                                    <li>
+                                        <a href="./data-index.html" target="_self">我要看数据</a>
+                                    </li>
+                                    <li>
+                                        <a href="./bill-closed-search.html" target="_self">我要看账单</a>
+                                    </li>
+                                    <li>
+                                        <a href="./account-index.html" target="_self">我的账号</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+                              <li><a href="./index.html">首页</a> <span class="divider">/</span></li>
+                              <li><a href="./order-index.html">我要查订单</a> <span class="divider">/</span></li>
+                              <li class="active">详情</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <!--mod-order-detail start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-order-detail">
+                           <div class="content">
+                               <!--订单跟踪信息 start-->
+                               <div class="item clearfix">
+                                    <div class="item-header">
+                                        <span class="title">订单跟踪信息</span>
+                                    </div>
+                                    <div class="item-content">
+                                        <!--package1 start-->
+                                        <div class="package">
+                                             <div class="package-header">
+                                                  <table class="package-h-table">
+                                                      <colgroup>
+                                                          <col class="package-name">
+                                                          <col class="express">
+                                                          <col class="express-id">
+                                                          <col class="time">
+                                                      </colgroup>
+                                                      <tbody>
+                                                        <tr>
+                                                            <td>包裹1：C13060410489728-1</td>
+                                                            <td>承运商：申通快递</td>
+                                                            <td>快递运单号：568658087267</td>
+                                                            <td>发货时间：2013-06-06 16:32:21</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="4">仓库：广州-石基仓</td>
+                                                        </tr>
+                                                      </tbody>
+                                                  </table>
+                                             </div>
+                                             <div class="package-content">
+                                                 <table class="ui-table package-desc-table">
+                                                     <thead>
+                                                        <tr>
+                                                            <th class="time">时间</th>
+                                                            <th class="operate-desc">处理描述</th>
+                                                            <th class="operator">操作人</th>
+                                                            <th class="remark">备注</th>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已打印</td>
+                                                            <td>YL005</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已拣货</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已验货</td>
+                                                            <td>YL007</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已包装</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已称重</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已发货</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>【福建厦门集美公司】的收件员【集美司机 电话(6282046)】已收件</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>由【福建厦门集美公司】发往【福建厦门中转部】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>快件已到达【福建厦门中转部】 扫描员是【吴中华】上一站是【福建厦门集美公司】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>由【福建厦门航空部】发往【重庆航空部】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>【福建厦门航空部】正在进行【装袋】扫描</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>派件异常</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>派件上门无此人，退回仓库</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                     </tbody>
+                                                 </table>
+                                             </div>
+                                        </div>
+                                        <!--package1 end-->
+                                        <!--package2 start-->
+                                        <div class="package">
+                                            <div class="package-header">
+                                                <table class="package-h-table">
+                                                    <colgroup>
+                                                        <col class="package-name">
+                                                        <col class="express">
+                                                        <col class="express-id">
+                                                        <col class="time">
+                                                    </colgroup>
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td>包裹2：C13060410489728-1</td>
+                                                        <td>承运商：申通快递</td>
+                                                        <td>快递运单号：568658087267</td>
+                                                        <td>发货时间：2013-06-06 16:32:21</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="4">仓库：广州-石基仓</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="package-content">
+                                                <table class="ui-table package-desc-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="time">时间</th>
+                                                            <th class="operate-desc">处理描述</th>
+                                                            <th class="operator">操作人</th>
+                                                            <th class="remark">备注</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已打印</td>
+                                                            <td>YL005</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已拣货</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已验货</td>
+                                                            <td>YL007</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已包装</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已称重</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>C13060410489728WMS已发货</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>【福建厦门集美公司】的收件员【集美司机 电话(6282046)】已收件</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>由【福建厦门集美公司】发往【福建厦门中转部】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>快件已到达【福建厦门中转部】 扫描员是【吴中华】上一站是【福建厦门集美公司】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>由【福建厦门航空部】发往【重庆航空部】</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>【福建厦门航空部】正在进行【装袋】扫描</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>派件异常</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2013-06-05 11:13:21</td>
+                                                            <td>派件上门无此人，退回仓库</td>
+                                                            <td>YL006</td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--package2 end-->
+                                    </div>
+                               </div>
+                               <!--订单跟踪信息 end-->
+                               <!--订单基本信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">订单跟踪信息</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <table class="package-sale-table">
+                                                   <colgroup>
+                                                       <col class="sale-id">
+                                                       <col class="order-id">
+                                                       <col class="bs-id">
+                                                       <col class="source">
+                                                   </colgroup>
+                                                   <tbody>
+
+                                                       <tr>
+                                                           <td>销售平台订单号：130606394477</td>
+                                                           <td>订单号：855003695-20130606-1093709308</td>
+                                                           <td>百世单号：C13060610541302</td>
+                                                           <td>订单来源：PAIPAI</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>ERP系统：BAISON_EFAST</td>
+                                                           <td>仓库：广州-石基仓</td>
+                                                           <td>公司名称：广州市汇美服装有限公司</td>
+                                                           <td>接单时间：2013-06-06 10:46</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td colspan="4">订单备注：之前给客户答应了送餐垫没有送到 这次给客户赠送一张餐垫。已发苏晨帮忙添加金燕 6.6</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td colspan="1">订单状态：派件异常</td>
+                                                           <td colspan="3">处理描述：派件上门无此人， 退回仓库</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+
+                               <!--收货人信息 end-->
+                               <!--收货人信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">收货人信息</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <table class="package-sale-table">
+                                                   <colgroup>
+                                                       <col class="sale-id">
+                                                       <col class="order-id">
+                                                       <col class="bs-id">
+                                                       <col class="source">
+                                                   </colgroup>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td>收货人：王云</td>
+                                                           <td>手机/电话：18382558667</td>
+                                                           <td>邮编：523758</td>
+                                                           <td>E-MAIL：225848340@qq.co</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td colspan="4">地址：广东 东莞市 东莞市黄江镇板湖北二街5号</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <!--订单基本信息 end-->
+
+                               <!--订单包含商品信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">订单包含商品信息</span><span class="price">总金额(元) : 241.05</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-content">
+                                               <table class="ui-table package-desc-table">
+                                                   <thead>
+                                                       <tr>
+                                                           <th class="code">编码</th>
+                                                           <th class="offer-name">名称</th>
+                                                           <th class="price">单价</th>
+                                                           <th class="offer-count">数量</th>
+                                                           <th class="supply">供应商</th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td>6959149320156</td>
+                                                           <td>针织上衣，藏青蓝，L</td>
+                                                           <td>109.00</td>
+                                                           <td>12</td>
+                                                           <td>广州市汇美服装有限公司</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>6959149320156</td>
+                                                           <td>针织上衣，藏青蓝，L</td>
+                                                           <td>149.00</td>
+                                                           <td>12</td>
+                                                           <td>广州市汇美服装有限公司</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <!--订单包含商品信息 end-->
+
+                               <!--发货信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">发货信息</span>
+                                   </div>
+
+                                   <div class="item-content">
+                                       <!--mod发货商品信息 start-->
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <h3>• 发货商品信息</h3>
+                                           </div>
+                                           <div class="package-content">
+                                               <table class="ui-table package-desc-table">
+                                                   <thead>
+                                                   <tr>
+                                                       <th class="code">编码</th>
+                                                       <th class="offer-name">名称</th>
+                                                       <th class="price">单价</th>
+                                                       <th class="offer-count">数量</th>
+                                                       <th class="supply">供应商</th>
+                                                   </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                   <tr>
+                                                       <td>6959149320156</td>
+                                                       <td>针织上衣，藏青蓝，L</td>
+                                                       <td>109.00</td>
+                                                       <td>12</td>
+                                                       <td>广州市汇美服装有限公司</td>
+                                                   </tr>
+                                                   <tr>
+                                                       <td>6959149320156</td>
+                                                       <td>针织上衣，藏青蓝，L</td>
+                                                       <td>149.00</td>
+                                                       <td>12</td>
+                                                       <td>广州市汇美服装有限公司</td>
+                                                   </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                       <!--mod发货商品信息 end-->
+
+                                       <!--mod发货包裹信息 start-->
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <h3>• 发货包裹信息（共1个包裹）</h3>
+                                           </div>
+                                           <div class="package-content">
+                                               <table class="post-package-table">
+                                                   <colgroup>
+                                                       <col class="col1">
+                                                       <col class="col2">
+                                                       <col class="col3">
+                                                       <col class="col4">
+                                                   </colgroup>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td colspan="4">包裹1：C13060410489728-1</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>承运商：申通快递</td>
+                                                           <td>快递运单号：568658087267</td>
+                                                           <td>净重（KG）：0.3</td>
+                                                           <td>毛重（KG）：0.4</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>体积（M3）：--</td>
+                                                           <td>耗材：--</td>
+                                                           <td colspan="2">发货时间：2013-06-06 16:32:21</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                       <!--mod发货包裹信息 end-->
+
+                                       <!--mod包含商品 start-->
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <h3>• 包含商品</h3>
+                                           </div>
+                                           <div class="package-content">
+                                               <table class="ui-table package-desc-table">
+                                                   <thead>
+                                                       <tr>
+                                                           <th class="code">编码</th>
+                                                           <th class="offer-name">名称</th>
+                                                           <th class="price">单价</th>
+                                                           <th class="offer-count">数量</th>
+                                                           <th class="supply">供应商</th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td>6959149320156</td>
+                                                           <td>针织上衣，藏青蓝，L</td>
+                                                           <td>109.00</td>
+                                                           <td>12</td>
+                                                           <td>广州市汇美服装有限公司</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>6959149320156</td>
+                                                           <td>针织上衣，藏青蓝，L</td>
+                                                           <td>149.00</td>
+                                                           <td>12</td>
+                                                           <td>广州市汇美服装有限公司</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                       <!--mod包含商品 end-->
+                                   </div>
+
+                               </div>
+                               <!--发货信息 end-->
+                           </div>
+                      </div>
+                  </div>
+              </div>
+               <!--mod-order-detail end-->
+
+
+
+
+
+          </div>
+         <!--content end-->
+
+          <div class="footer clearfix" id="footer">
+                <div class="layout">
+                    <div class="grid">
+                        <div class="mod-footer">
+                            <div class="content">
+                                <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+     </div>
+</body>
+</html>

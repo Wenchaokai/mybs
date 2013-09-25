@@ -1,0 +1,142 @@
+.mod-order-detail{
+    margin-bottom: 20px;
+    color:#222;
+}
+.mod-order-detail .content{
+    border: 1px solid #DDD;
+    border-top:0 none;
+    font-size: 12px;
+}
+.mod-order-detail .item{
+
+}
+.mod-order-detail .item-header{
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    background-color: #E3EEFF;
+    border-bottom: 1px solid #DDD;
+    border-top: 1px solid #DDD;
+    color:#222;
+}
+.mod-order-detail .item-header span.title{
+    padding-left: 8px;
+    font-weight: bold;
+}
+.mod-order-detail .item-header span.price{
+    padding-left: 18px;
+}
+.mod-order-detail .item-content{
+    padding: 8px 8px 8px 8px;
+}
+.package-h-table{
+  width: 100%;
+  table-layout: fixed;
+}
+.package-header h3{
+    font-size: 14px;
+    line-height: 20px;
+}
+.package-h-table td{
+    height: 26px;
+    padding-top: 4px;
+}
+.package-h-table col.package-name{
+    width:25%;
+}
+.package-h-table col.express{
+    width:25%;
+}
+.package-h-table col.express-id{
+    width:25%;
+}
+.package-h-table col.time{
+    width:25%;
+}
+.package-desc-table th{
+    height: 27px;
+    line-height: 27px;
+}
+.package-desc-table th.time{
+    width:180px;
+}
+.package-desc-table th.operate-desc{
+
+}
+.package-desc-table th.operator{
+    width: 100px;
+}
+.package-desc-table th.remark{
+    width: 180px;
+}
+
+
+.package-desc-table th.code{
+    width:140px;
+}
+.package-desc-table th.offer-name{
+
+}
+.package-desc-table th.price{
+    width: 100px;
+}
+.package-desc-table th.offer-count{
+    width: 80px;
+}
+.package-desc-table th.supply{
+    width: 210px;
+}
+
+.package-desc-table td{
+    line-height: 19px;
+    padding: 6px 0px;
+    font-size: 12px;
+}
+
+
+
+.package-sale-table{
+    width: 100%;
+    table-layout: fixed;
+}
+.package-sale-table td{
+    height: 26px;
+    padding-top: 4px;
+}
+.package-sale-table col.sale-id{
+    width:25%;
+}
+.package-sale-table col.order-id{
+    width:30%;
+}
+.package-sale-table col.bs-id{
+    width:25%;
+}
+.package-sale-table col.source{
+    width:20%;
+}
+
+.post-package-table{
+    width: 96%;
+    table-layout: fixed;
+    border:1px solid #eee;
+    margin: 0 auto;
+}
+.post-package-table td{
+    height: 21px;
+    padding-top: 4px;
+    padding-left: 8px;
+}
+.post-package-tablecol.col1{
+    width:25%;
+}
+.post-package-table col.col2{
+    width:30%;
+}
+.post-package-table col.col3{
+    width:25%;
+}
+.post-package-table col.col4{
+    width:20%;
+}
+

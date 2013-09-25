@@ -1,0 +1,43 @@
+.member-filter{
+
+}
+.member-filter .form-horizontal{
+    padding-top: 20px;
+}
+.member-filter .form-horizontal .label-order-id{
+    width:78px;
+}
+.member-filter .form-horizontal  .controls{
+    margin-left: 78px;
+}
+
+.table-member-list th.mname{
+   width:60px;
+}
+.table-member-list th.email{
+    width: 108px;
+}
+.table-member-list th.date{
+   width: 100px;
+}
+.table-member-list th.allow-customer{
+    width: 150px;
+}
+.table-member-list th.allow-warehouse{
+      width: 92px;
+}
+.table-member-list th.action{
+    width: 130px;
+}
+.table-member-list a{
+    text-decoration:underline;
+    margin-left: 3px;
+}
+
+.mod-no-result .no-result {
+    height: 100px;
+    line-height: 40px;
+    padding-top: 40px;
+    background: transparent url(../../../img/pages/icon-no-result.png) no-repeat 320px 42px;
+    padding-left: 360px;
+}

@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #ff0017;
+    text-decoration: underline;
+}
+
+.mod-masthead{
+    height: 66px;
+    overflow:hidden;
+    position: relative;
+    margin-top: 8px;
+}
+.mod-masthead span.admin{
+    position:absolute;
+    display: block;
+    height:42px;
+    left:222px;
+    top:5px;
+    border-left:1px solid #000;
+    padding-left: 18px;
+    font-size: 32px;
+    line-height: 42px;
+    color:#000;
+}

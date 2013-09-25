@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userSpace">
+	<typeAlias alias="user" type="com.best.domain.User" />
+
+	<resultMap class="user" id="allProperties">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userCount" column="user_count" />
+		<result property="userCustomers" column="user_customers"/>
+		<result property="userWareHouses" column="user_warehouses"/>
+		<result property="userWareHousesProperties" column="user_warehouses_properties"/>
+	</resultMap>
+	
+	<resultMap class="user" id="properties">
+		<result property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userCount" column="user_count" />
+		<result property="userPassword" column="user_password"/>
+		<result property="userCustomers" column="user_customers"/>
+		<result property="userWareHouses" column="user_warehouses"/>
+		<result property="userWareHousesProperties" column="user_warehouses_properties"/>
+	</resultMap>
+	
+	<select id="GET_USER_BY_ID" parameterClass="java.lang.Long" resultMap="properties">
+		<![CDATA[
+            SELECT 
+            	*
+            FROM 
+            	users 
+            WHERE 
+            	user_id=#userId#
+        ]]>
+	</select>
+	
+	<update id="RESET_USER_PASSWORD" parameterClass="java.util.Map">
+		<![CDATA[
+            UPDATE 
+            	users 
+            SET 
+            	user_password=#pwd#
+            WHERE
+            	user_id=#userId#
+        ]]>
+	</update>
+	
+	<update id="UPDATE_USER_PASSWORD" parameterClass="java.util.Map">
+		<![CDATA[
+            UPDATE 
+            	users 
+            SET 
+            	user_password=#newUserPassword#
+            WHERE
+            	user_id=#userId# AND user_password=#oldUserPassword#
+        ]]>
+	</update>
+	
+	<select id="CHECKED_USER_COUNT" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT 
+            	count(user_id) 
+            FROM 
+            	users 
+            WHERE 
+            	user_count=#userCount#
+        ]]>
+	</select>
+
+	<select id="CHECK_USER" parameterClass="user" resultMap="allProperties">
+		<![CDATA[
+            SELECT 
+            	user_id, user_name,user_count,user_customers,user_warehouses,user_warehouses_properties
+            FROM 
+            	users 
+            WHERE 
+            	user_count=#userCount# AND user_password=#userPassword#
+        ]]>
+	</select>
+	
+	<select id="GET_USER_BY_PAGESIZE" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	user_id,user_count,user_name,user_customers,user_warehouses,user_warehouses_properties
+            FROM 
+            	users
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>  
+          </dynamic>
+        <![CDATA[
+            ORDER BY 
+            	user_id
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	
+	<select id="GET_USER_BY_NAME" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	user_id,user_count,user_name,user_customers,user_warehouses,user_warehouses_properties
+            FROM 
+            	users
+            WHERE
+            	user_name LIKE #searchName#
+        ]]>
+          <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+          <![CDATA[
+            ORDER BY 
+            	user_id
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	<select id="GET_USER_BY_COUNT" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	user_id,user_count,user_name,user_customers,user_warehouses,user_warehouses_properties
+            FROM 
+            	users
+            WHERE
+            	user_count LIKE #searchCount#
+        ]]>
+          <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+          <![CDATA[
+            ORDER BY 
+            	user_id
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	<select id="GET_USER_BY_ALL" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	user_id,user_count,user_name,user_customers,user_warehouses,user_warehouses_properties
+            FROM 
+            	users
+            WHERE
+            	user_count LIKE #searchCount# AND user_name LIKE #searchName#
+          ]]>
+          <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+          <![CDATA[
+            ORDER BY 
+            	user_id
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	
+	<select id="GET_USER_BY_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	users
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>  
+          </dynamic>
+	</select>
+	
+	<select id="GET_USER_BY_NAME_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	users
+            WHERE
+            	user_name LIKE #searchName#
+        ]]>
+        	<isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+	</select>
+	<select id="GET_USER_BY_COUNT_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	users
+            WHERE
+            	user_count LIKE #searchCount#
+        ]]>
+        <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+	</select>
+	<select id="GET_USER_BY_ALL_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	users
+            WHERE
+            	user_count LIKE #searchCount# AND user_name LIKE #searchName#
+        ]]>
+        <isNotNull prepend="AND" property="customerSelected">  
+                ( user_customers LIKE #customerSelected#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="warehouseSelected">  
+                ( user_warehouses LIKE #warehouseSelected#)  
+            </isNotNull>
+	</select>
+	<update id="UPDATE_USER_INFO" parameterClass="user">
+		<![CDATA[
+			UPDATE
+				users
+			SET
+				user_name=#userName#,
+				user_password=#userPassword#,
+				user_customers=#userCustomers#,
+				user_warehouses=#userWareHouses#,
+				user_warehouses_properties=#userWareHousesProperties#
+			WHERE
+				user_count=#userCount#
+		]]>
+	</update>
+	<insert id="INSERT_USER" parameterClass="user">
+		<![CDATA[
+            INSERT INTO 
+            	users (user_count,user_name, user_password,user_customers,user_warehouses,user_warehouses_properties) 
+            VALUES 
+            	(#userCount#,#userName#, #userPassword#,#userCustomers#,#userWareHouses#,#userWareHousesProperties#)
+        ]]>
+	</insert>
+	<delete id="DELETE_USER" parameterClass="java.lang.Long">
+		<![CDATA[
+            DELETE FROM 
+            	users
+            WHERE 
+            	user_id=#userId#
+        ]]>
+	</delete>
+
+</sqlMap>

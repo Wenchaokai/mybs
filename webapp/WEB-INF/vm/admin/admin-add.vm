@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>会员管理-新增</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/admin/opration.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">${user.userName}</span>&nbsp;&nbsp;<a href="/admin/admin-setting-view.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/admin/admin-Logout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/admin/admin-index.do"><img src="/static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="active">
+                                        <a href="/admin/admin-index.do" target="_self">会员管理</a>
+                                    </li>
+									<li >
+                                        <a href="/admin/admin-bill.do" target="_self">账单管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+                              <li><a href="/admin/admin-index.do">会员管理</a> <span class="divider">/</span></li>
+                              <li class="active">新增</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-add-member">
+                          <div class="content">
+                              <form class="form-horizontal" name="member-form" id="member-form" action="/admin/add-member.do" method="post">
+                                  <div class="control-group">
+                                      <label class="control-label" for="">请输入姓名：</label>
+                                      <div class="controls">
+                                          <input type="text" placeholder="请输入姓名" id="userName" name="userName" required>
+										  <span class="help-inline hide">用户名不能为空</span>
+                                      </div>
+                                  </div>
+                                  <div class="control-group #if (${memberExisted}) error #end">
+                                      <label class="control-label" for="">请输入邮箱：</label>
+                                      <div class="controls">
+                                          <input type="text" placeholder="请输入邮箱" id="userCount" name="userCount" required>
+										#if (${memberExisted})
+    										<span class="help-inline" id="countSpan">用户名已经存在</span>
+    									#else
+    										<span class="help-inline hide" id="countSpan">请登录账号</span>
+    									#end
+                                      </div>
+                                  </div>
+                                  <div class="control-group control-group-fixed">
+                                      <label class="control-label" for="">请选择可访问的客户：</label>
+                                  </div>
+                                  <div class="control-group">
+                                      <div class="customer-select clearfix" id="customer-select" name="customer-select">
+											#foreach($customers in $customerList)
+													<ul>
+													#foreach($customer in $customers)
+                                                        <li>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="userCustomer" value="${customer.customerCode}#${customer.customerName}">
+                                                                ${customer.customerName}
+                                                            </label>
+                                                        </li>
+													#end
+													</ul>
+												#end
+                                      </div>
+                                  </div>
+                                  <div class="control-group control-group-fixed">
+                                      <label class="control-label" for="">请选择可访问的仓库：</label>
+                                  </div>
+                                  <div class="control-group">
+                                      <div class="customer-select clearfix" id="warehouse-select" name="warehouse-select">
+											#foreach($warehouses in $wareHouseList)
+													<ul>
+													#foreach($warehouse in $warehouses)
+                                                        <li>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="userWareHouse" value="${warehouse.wareHouseCode}#${warehouse.wareHouseName}">
+                                                                ${warehouse.wareHouseName}
+                                                            </label>
+                                                        </li>
+													#end
+													</ul>
+												#end
+                                      </div>
+                                  </div>
+                                  <div class="control-group control-group-fixed">
+                                      <label class="control-label" for="">请设置库存查询的筛选条件：</label>
+                                  </div>
+                                  <div class="control-group">
+                                      <div class="customer-select clearfix" id="properties-select" name="properties-select">
+                                          <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="颜色">
+                                                      颜色
+                                                  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="款号">
+                                                      款号
+                                                  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="尺码">
+                                                      尺码
+                                                  </label>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+
+                                  <div class="control-group">
+                                      <div class="controls">
+                                          <button type="submit" class="btn btn-primary btn-large">确定</button>
+										  <a class="btn btn-danger btn-large" href="javascript:history.go(-1);">取消</a>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add end--->
+
+          </div>
+         <!--content end-->
+
+     </div>
+     <script src="/static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="/static/js/pages/admin/operation.js"></script>
+</body>
+</html>

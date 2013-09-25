@@ -1,0 +1,170 @@
+.data-container{
+
+}
+
+.data-container .grid-main{
+    float: left;
+    width: 710px;
+    min-height: 400px;
+    padding-top: 22px;
+}
+.data-container .grid-sub{
+    float: right;
+    width: 270px;
+    min-height: 400px;
+}
+.mod-overview{
+    height: 122px;
+    overflow: hidden;
+    padding-left: 170px;
+    background: transparent url(../../img/pages/gaikuang.png) no-repeat 0px 0px;
+}
+.mod-overview .header{
+    font-size: 16px;
+    color: #9c9c9e;
+    padding-top: 30px;
+    height:30px;
+}
+.mod-overview .header span{
+    padding: 0px 4px;
+}
+.mod-overview table{
+    width:540px;
+}
+.mod-overview table .c1{
+    width: 190px;
+}
+.mod-overview table .c2{
+    width: 190px;
+}
+.mod-overview table em{
+    color:#ff7300;
+    font-style: normal;
+}
+.mod-detail{
+    height: 320px;
+}
+.mod-detail .header{
+    margin-top: 10px;
+    height: 50px;
+    color:#808080;
+    font-size: 12px;
+    width:710px;
+    line-height: 48px;
+    border-bottom: 2px solid #d7d7d7;
+}
+.mod-detail .header .title{
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0px;
+    padding-top: 4px;
+}
+.mod-detail .header .action{
+    float: right;
+}
+.mod-detail .header .action .select-date{
+    margin-bottom: 0px;
+    width: 130px;
+}
+.mod-detail #mod-detail-table-container{
+    height: 240px;
+}
+.mod-detail .loading{
+    background: transparent url("../../img/pages/data/loading.gif") center center;
+}
+.mod-detail table th{
+    height: 34px;
+
+    background-color: transparent;
+    text-align: left;
+    color: #868592;
+    border:0 none;
+    border-bottom: 1px solid #d7d7d7;
+    font-weight: normal;
+}
+.mod-detail table th.t1{
+    width: 190px;
+}
+.mod-detail table th.t2{
+     width: 170px;
+}
+.mod-detail table th.t3{
+     width: 170px;
+}
+.mod-detail table th.t4{
+
+}
+.mod-detail table td{
+    background-color: transparent;
+    text-align: left;
+    color: #868592;
+    border:0 none;
+    font-weight: normal;
+    height: 24px;
+}
+.mod-detail table td em{
+    font-style: normal;
+    color:#ff7300;
+}
+.mod-detail table td span{
+    padding-left: 30px;
+    color:#333;
+    background: transparent url("../../img/pages/data/trend.gif") no-repeat 14px 2px;
+}
+.mod-detail table td span.decline{
+    background-position: 14px -44px;
+}
+.mod-detail-chart{
+    height: 400px;
+    margin-bottom: 32px;
+    border-top:2px solid #d7d7d7;
+    background-color: #f3f3f3;
+}
+.mod-live .header{
+    height: 62px;
+    background: transparent url("../../img/pages/zhibo.gif");
+    color:#847a58;
+    position: relative;
+    width:280px;
+    margin-right: -10px;
+}
+.mod-live .header span{
+    display: block;
+    position: absolute;
+    font-size: 14px;
+    left:168px;
+    top:17px;
+}
+.mod-live .content{
+    background-color: #fafafa;
+}
+.mod-live .content ul{
+    margin: 0px;
+}
+.mod-live .content li{
+    width:248px;
+    height:32px;
+    line-height: 32px;
+    overflow: hidden;
+    padding-left: 22px;
+    font-size: 14px;
+    color:#666;
+    list-style: none;
+    margin: 0px;
+    border-top:1px solid #f3f3f3;
+}
+.mod-live .content li span{
+    color:#ff7300;
+}
+.mod-live .content li.first{
+    border-top:0 none;
+    height: 25px;
+    line-height: 20px;
+}
+.mod-enters .item{
+    height: 103px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+

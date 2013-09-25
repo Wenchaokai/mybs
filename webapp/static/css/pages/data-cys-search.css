@@ -1,0 +1,52 @@
+.mod-guide{
+
+}
+.mod-guide .header{
+    height: 40px;
+    font-size: 14px;
+    overflow:hidden;
+    padding-top: 12px;
+}
+
+.mod-cys-filter{
+
+}
+.mod-cys-filter .form-horizontal{
+    padding-top: 20px;
+}
+.mod-cys-filter .form-horizontal  .controls{
+    margin-left: 0px;
+}
+.mod-cys-filter .form-horizontal select{
+    width: 128px;
+}
+.mod-cys-filter.form-horizontal input{
+    width: 100px;
+}
+.mod-cys-filter .form-horizontal .field{
+    width: 242px;
+    float: left;
+}
+
+.table-store-list{
+    font-size: 12px;
+}
+.table-store-list th{
+    height: 27px;
+    line-height: 27px;
+}
+
+.table-store-list td{
+  padding: 6px 0px;
+  line-height: 19px;
+
+}
+
+
+.mod-no-result .no-result {
+    height: 100px;
+    line-height: 40px;
+    padding-top: 40px;
+    background: transparent url(../../img/pages/icon-no-result.png) no-repeat 320px 42px;
+    padding-left: 360px;
+}

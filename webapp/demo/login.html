@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>登录页面</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/pages/login.css">
+    <script src="../static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+     <div class="doc" id="doc">
+         <div class="topbar" id="topbar">
+             <div class="layout">
+                 <div class="grid">
+                     <div class="mod-toolbar">
+                         <p>你好！<span class="user-name">方健华</span>&nbsp;&nbsp;<a href="./user-manage.html" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="./loginout.html" target="_self" class="login">[退出]</a></p>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="header" id="header">
+             <div class="layout">
+                 <div class="grid">
+                     <div class="mod-masthead">
+                         <a href="./index.html"><img src="../static/img/logo.jpg" /></a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+          <div class="content" id="content">
+               <div class="layout layout-banner">
+                   <div class="grid">
+                       <div class="mod-login">
+                            <div class="content">
+                                <div class="login-box">
+                                    <div class="wrap clearfix">
+                                        <form action="" method="post" id="login-form" class="ui-form">
+                                            <fieldset>
+                                                <legend>用户登录</legend>
+                                                <div class="ui-form-content">
+                                                    <span class="label label-important label-error" id="label-error-box"><i class=" icon-remove icon-white"></i><span class="info">请输入用户名</span></span>
+                                                    <label for="userName">用户名：</label>
+                                                    <input type="text" placeholder="请输入用户名" name="userName" id="userName">
+                                                    <label for="pwd">密码：</label>
+                                                    <input type="password" placeholder="请输入密码" name="password" id="pwd">
+                                                    <span class="label label-important hide" id="label-pwd">请输入密码。</span>
+                                                    <label class="checkbox">
+                                                        <input type="checkbox">记住用户名
+                                                    </label>
+                                                    <button type="submit" class="btn btn-block btn-primary">登录</button>
+                                                </div>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+              <div class="layout">
+                   <div class="grid">
+                       <div class="mod-about-bs">
+                           <div class="content">
+                               <dl class="list">
+                                   <dd class="item">
+                                       <h2 class="data">
+                                           智能优选，更高效
+                                       </h2>
+                                       <ul>
+                                           <li>
+                                               • 精确的承运商管理
+                                           </li>
+                                           <li>
+                                               • 承运商的实际派送时效和承诺时效的实时监控
+                                           </li>
+                                           <li>
+                                               • 为每个订单匹配最优的承运商
+                                           </li>
+                                       </ul>
+                                   </dd>
+                                   <dd class="item">
+                                       <h2 class="monitor">品质保障，更放心</h2>
+                                       <ul>
+                                           <li>
+                                               • 订单全程客服跟进
+                                           </li>
+                                           <li>
+                                               • 货损、货丢全赔偿
+                                           </li>
+                                       </ul>
+                                   </dd>
+                                   <dd class="item">
+                                       <h2 class="service">
+                                           质优价廉，更便宜
+                                       </h2>
+                                       <ul>
+                                           <li>
+                                               • 有竞争力的报价
+                                           </li>
+                                           <li>
+                                               • 为每个订单按照成本最优的方式选择承运商
+                                           </li>
+                                       </ul>
+                                   </dd>
+                               </dl>
+                           </div>
+                       </div>
+                   </div>
+
+              </div>
+
+          </div>
+
+          <div class="footer clearfix" id="footer">
+                <div class="layout">
+                    <div class="grid">
+                        <div class="mod-footer">
+                            <div class="content">
+                                <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+     </div>
+    <script src="../static/js/pages/login.js"></script>
+</body>
+</html>

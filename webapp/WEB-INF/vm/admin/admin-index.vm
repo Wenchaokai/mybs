@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>管理后台首页</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/admin/index.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("ADMIN_USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">${user.userName}</span><a href="/admin/admin-setting-view.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/admin/admin-Logout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/admin/admin-index.do"><img src="/static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="active">
+                                        <a href="/admin/admin-index.do" target="_self">会员管理</a>
+                                    </li>
+									<li >
+                                        <a href="/admin/admin-bill-manager.do" target="_self">账单管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="layout">
+                   <div class="grid">
+                       <div class="member-filter" id="member-filter">
+                           <div class="header">
+                               <form class="form-horizontal form-member-search" method="post" action="/admin/admin-index.do">
+                                   <div class="control-group">
+                                       <label class="control-label label-order-id" style="margin-left:0px;">会员名称：</label>
+                                       <div class="controls">
+                                               <input type="text" value="${searchName}" id="searchName" name="searchName" style="width:100px" class="" placeholder="请输入会员名称"/>
+                                           <span class="help-inline" style="margin-left: 2px;">会员邮箱：</span>
+                                           <input type="text" value="${searchCount}" id="searchCount" name="searchCount" style="width:100px" class="" placeholder="请输入会员邮箱"/>
+                                          <span class="help-inline">可访问客户:</span>
+                                           <select class="select-sku" style="width:150px;margin-left: 2px;" id="customerSelected" name="customerSelected">
+												<option value="-1">所有客户</option>
+												#foreach($customer in $customers)
+													<option value="${customer.customerCode}" #if(${customer.checked}) selected #end>${customer.customerName}</option>
+												#end
+                                           </select>
+                                           <span class="help-inline">可访问仓库:</span>
+                                           <select class="select-sku" style="width:130px;margin-left: 2px;" id="warehouseSelected" name="warehouseSelected">
+                                               <option value="-1">所有仓库</option>
+											   #foreach($warehouse in $wareHouses)
+													<option value="${warehouse.wareHouseCode}" #if(${warehouse.checked}) selected #end>${warehouse.wareHouseName}</option>
+												#end
+                                           </select>
+                                           <button type="submit" style="margin-left: 2px;" class="btn btn-primary">查看</button>
+                                           <a class="btn btn-success" href="/admin/user-add-view.do" target="_self"><i class="icon-plus icon-white"></i>新增会员</a>
+                                       </div>
+                                   </div>
+                               </form>
+                           </div>
+                            <div class="content">
+                                <table class="ui-table table-member-list">
+                                    <thead>
+                                    <tr>
+                                        <th class="mname">会员姓名</th>
+                                        <th class="email">会员邮箱</th>
+										<th class="mname">会员角色</th>
+                                        <th class="allow-customer">可访问客户</th>
+                                        <th class="allow-warehouse">可访问仓库</th>
+                                        <th class="action">操作</th>
+                                    </tr>
+                                    </thead>
+									#if(${res.size()}>0)
+                                      <tbody>
+                                        #foreach($member in $res)
+        									<tr>
+        										<td>${member.userName}</td>
+        										<td>${member.userCount}</td>
+												<td>
+        											#if(${member.userRole}==1)
+														管理员
+													#else
+														普通会员
+													#end
+        										</td>
+        										<td>
+        											${member.formatCustomerCode()}
+        										</td>
+												<td>
+        											${member.formatWareHouse()}
+        										</td>
+        										<td>
+                                                    <a href="/admin/admin-update-view.do?userId=${member.userId}">修改</a>
+                                                    <a href="/admin/admin-view.do?userId=${member.userId}">查看</a>
+                                                    <a target="_self" data-id="13444" href="javascript:if(confirm('确认删除吗?\n此记录含有资金变动，会影响您的金额统计，请慎重考虑。删除后，您可在回收站还原，或永久删除。'))window.location='/admin/admin-delete.do?userId=${member.userId}&currentPage=${currentPage}&searchName=${searchName}&searchCount=${searchCount}&warehouseSelected=${warehouseSelected}&customerSelected=${customerSelected}'" data-mid="1">删除</a>
+                                                    <a href="javascript:if(confirm('确定要进行密码初始化吗？'))window.location='/admin/admin-pas-reset.do?userId=${member.userId}&currentPage=${currentPage}&searchName=${searchName}&searchCount=${searchCount}&warehouseSelected=${warehouseSelected}&customerSelected=${customerSelected}'" target="_self" data-mid="13444">密码初始化</a>
+                                                </td>
+                                        </tr>
+        								#end              
+                                      </tbody>
+        							  #end
+                                </table>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <!--table end-->
+
+               <!--page start-->
+               <div class="layout">
+                   <div class="grid">
+					#if(${res.size()}==0)
+        				<div class="mod-no-result">
+                            <div class="content">
+                                <p class="no-result">抱歉！无符合条件的查询结果。请修改查询条件，重新搜索！</p>
+                            </div>
+                        </div>
+        
+        				#else
+        
+                        <!--mod-page start--->
+                        <div class="mod-pages">
+                            <div class="content">
+        
+                                <div class="pagination pagination-right">
+                                    <ul>
+                                        
+                                        <li><a href="/admin/admin-index.do?currentPage=${prePage}&searchName=${searchName}&searchCount=${searchCount}&warehouseSelected=${warehouseSelected}&customerSelected=${customerSelected}" target="_self">上一页</a></li>
+        								#set($nums=[${start} .. ${end}])
+        								#foreach($i in $nums)
+        									#if ($i==${currentPage})
+        										<li class="active"><a target="_self">$i</a></li>
+        									#else
+        										<li><a href="/admin/admin-index.do?currentPage=$i&searchName=${searchName}&searchCount=${searchCount}&warehouseSelected=${warehouseSelected}&customerSelected=${customerSelected}">$i</a></li>
+        									#end
+        								#end
+        								<li><a href="/admin/admin-index.do?currentPage=${nextPage}&searchName=${searchName}&searchCount=${searchCount}&warehouseSelected=${warehouseSelected}&customerSelected=${customerSelected}">下一页</a></li>
+                                        
+                                       
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+        				#end
+                        <!--mod-page end -->
+                       
+                   </div>
+               </div>
+               <!--page end-->
+
+
+
+
+          </div>
+         <!--content end-->
+
+     </div>
+
+	 <div id="modal-del" data-action="" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h3>您确定要删除此记录吗？</h3>
+         </div>
+         <div class="modal-body">
+             <p>此记录含有资金变动，会影响您的金额统计，请慎重考虑。删除后，您可在回收站还原，或永久删除。</p>
+         </div>
+         <div class="modal-footer">
+             <a href="#" class="btn btn-cancle">取消</a>
+             <a href="#" class="btn btn-primary btn-comfirm">确认</a>
+         </div>
+     </div>
+     <div id="modal-pwd-init" data-action="" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h3>您确定要进行密码初始化吗？</h3>
+         </div>
+         <div class="modal-body">
+             <p>此动作会设置为初始密码，请慎重。</p>
+         </div>
+         <div class="modal-footer">
+             <a href="#" class="btn btn-cancle">取消</a>
+             <a href="#" class="btn btn-primary btn-comfirm">确认</a>
+         </div>
+     </div>
+	#if (${error})
+		#if (${resetFlag})
+			<script type="text/javascript" >
+				alert("密码修改初始化成功");
+			</script>
+    	#else
+    		<script type="text/javascript" >
+    				alert("密码验证初始化出错");
+    		</script>
+    	#end
+	#end
+    <script src="/static/js/pages/admin/index.js"></script>
+</body>
+</html>

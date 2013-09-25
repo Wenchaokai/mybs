@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="statisticSpace">
+
+	<typeAlias alias="idoStatistic" type="com.best.domain.IdoStatistic" />
+	
+	<typeAlias alias="shippingOrder" type="com.best.domain.ShippingOrder" />
+	
+	<typeAlias alias="orderData" type="com.best.domain.OrderData" />
+	
+	<typeAlias alias="shippingOrderData" type="com.best.domain.ShippingOrderData" />
+	
+	<typeAlias alias="salesShipping" type="com.best.domain.SalesShipping" />
+	
+	<typeAlias alias="salesOrder" type="com.best.domain.SalesOrder" />
+	
+	<resultMap class="salesOrder" id="salesOrderProperties">
+		<result property="id" column="id" />
+		<result property="orderCode" column="ORDERCODE" />
+		<result property="refOrderCode" column="REFORDERCODE" />
+		<result property="orderSource" column="ORDERSOURCE" />
+		<result property="orderTime" column="ORDERTIME" />
+		<result property="note" column="NOTE" />
+		<result property="status" column="STATUS" />
+		<result property="ldoCode" column="LDOCODE" />
+		<result property="totalAmount" column="TOTALAMOUNT" />
+		<result property="userName" column="NAME" />
+		<result property="phone" column="PHONENUMBER" />
+		<result property="postalCode" column="POSTALCODE" />
+		<result property="email" column="EMAIL" />
+		<result property="shippingAddress" column="SHIPPINGADDRESS" />
+		<result property="province" column="PROVINCE" />
+		<result property="city" column="CITY" />
+		<result property="district" column="DISTRICT" />
+		<result property="customerId" column="CUSTOMERID" />
+		<result property="wareHouseId" column="WAREHOUSEID" />
+		<result property="mobilePhone" column="MOBILENUMBER" />
+		<result property="canceledNotifyStatus" column="CANCELEDNOTIFYSTATUS" />
+		<result property="deliveredNotiifyStatus" column="DELIVEREDNOTIFYSTATUS" />
+		<result property="acceptFailNotifyStatus" column="ACCEPTFAILNOTIFYSTATUS" />
+	</resultMap>
+	
+	<resultMap class="orderData" id="orderDataProperties">
+		<result property="orderSum" column="Order_SUM" />
+		<result property="totalMount" column="TOTAL_MOUNT" />
+		<result property="deliveredCount" column="DELIVERED_COUNT"/>
+		<result property="cancelCount" column="CANCEL_COUNT"/>
+		<result property="paymentCount" column="PAYMENT_COUNT"/>
+		<result property="month" column="MONTH"/>
+	</resultMap>
+	
+	<resultMap class="shippingOrder" id="shippingProperties">
+		<result property="numCount" column="COUNT" />
+		<result property="dateTime" column="DAYTIME" />
+		<result property="shippingOrderName" column="LOGISTICSPROVIDERNAME"/>
+	</resultMap>
+	
+	<resultMap class="shippingOrder" id="shippingDiffProperties">
+		<result property="numCount" column="COUNT" />
+		<result property="dateTime" column="DAYTIME" />
+		<result property="shippingOrderName" column="LOGISTICSPROVIDERNAME"/>
+		<result property="diffTime" column="DIFFTIME"/>
+	</resultMap>
+
+	<resultMap class="idoStatistic" id="allProperties">
+		<result property="numCount" column="COUNT" />
+		<result property="dateTime" column="DATETIME" />
+		<result property="wareHouseCode" column="WH_CODE"/>
+	</resultMap>
+	
+	<resultMap class="idoStatistic" id="provinceStatistic">
+		<result property="numCount" column="COUNT" />
+		<result property="dateTime" column="DATETIME" />
+		<result property="province" column="PROVINCE"/>
+	</resultMap>
+	
+	<resultMap class="idoStatistic" id="priceStatistic">
+		<result property="id" column="ID" />
+		<result property="qtyOrdered" column="QTY_ORDERED" />
+		<result property="price" column="PRICE" />
+		<result property="skuCode" column="SKU_CODE" />
+		<result property="skuDesc" column="SKU_DESCR_C" />
+		<result property="customerName" column="CUSTOMER_NAME"/>
+	</resultMap>
+	
+	<resultMap class="idoStatistic" id="percentStatistic">
+		<result property="numCount" column="COUNT" />
+		<result property="dateTime" column="DATETIME" />
+		<result property="skuCode" column="SKUCODE"/>
+	</resultMap>
+	
+	<resultMap class="salesShipping" id="salesShippingStatistic">
+		<result property="id" column="ID" />
+		<result property="lastUpdateTime" column="LAST_UPDATE_TIME" />
+		<result property="remark" column="REMARK"/>
+		<result property="acceptAddress" column="ACCEPT_ADDRESS"/>
+		<result property="shippingOrderId" column="SHIPPING_ORDER_ID"/>
+	</resultMap>
+	
+	<resultMap class="shippingOrderData" id="shippingOrderDataStatistic">
+		<result property="id" column="id"/>
+		<result property="ldoId" column="LDOID"/>
+		<result property="relationNo" column="RELATION_NO" />
+		<result property="whCode" column="WH_CODE" />
+		<result property="wareHouseName" column="WAREHOUSENAME"/>
+		<result property="consigneeName" column="CONSIGNEENAME"/>
+		<result property="logisticsProviderName" column="LOGISTICSPROVIDERNAME"/>
+		<result property="consigneePhone" column="CONSIGNEE_PHONE"/>
+		<result property="shippingOrderNo" column="SHIPPINGORDERNO"/>
+		<result property="shippingTime" column="SHIPPINGTIME"/>
+		<result property="status" column="STATUS"/>
+		<result property="ldoCode" column="LDOCODE"/>
+		<result property="cubic" column="CUBIC"/>
+		<result property="consumable" column="CONSUMABLES"/>
+		<result property="netWeight" column="NETWEIGHT"/>
+		<result property="grossWeight" column="GROSSWEIGHT"/>
+	</resultMap>
+
+	<!-- <select id="SELECT_SKU_WAREHOUSE_IDO" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+			SELECT 
+					COUNT(a.ID) AS COUNT,DATETIME,WH_CODE
+				FROM 
+					(SELECT 
+							to_char(CREATE_TIME,'yyyyMMdd') AS DATETIME,ID,WH_CODE
+						FROM 
+							ECBOSS_LDO
+						WHERE CUSTOMER_CODE=#customerCode# 
+							AND
+								CREATE_TIME>=to_date(#startTime#,'yyyyMMdd')
+							AND 
+								CREATE_TIME<=(to_date(#endTime#,'yyyyMMdd'))
+			]]>
+						<isNotNull property="wareHouseCodeList" prepend="AND">  
+						        <iterate property="wareHouseCodeList" open="("
+						          close=")" conjunction="or">
+						          WH_CODE=#wareHouseCodeList[]#
+						        </iterate>
+						</isNotNull>
+			<![CDATA[								
+						) a
+			]]>
+			<isNotNull  property="skuCode">
+				<![CDATA[
+					JOIN (
+						SELECT LDO_ID
+						FROM ECBOSS_LDO_ITEM
+						WHERE 
+								SKU_CODE=#skuCode#
+							AND
+								CREATE_TIME>=to_date(#startTime#,'yyyyMMdd')
+							AND 
+								CREATE_TIME<=(to_date(#endTime#,'yyyyMMdd'))
+						) b
+				ON
+					a.ID=b.LDO_ID
+				]]>
+			</isNotNull>
+		<![CDATA[
+				GROUP BY 
+					WH_CODE,DATETIME
+		]]>
+	</select> -->
+	
+	<select id="SELECT_SKU_PROVINCE_IDO" parameterClass="java.util.Map" resultMap="provinceStatistic">
+		<![CDATA[
+			SELECT 
+				COUNT(DISTINCT a.ID) AS COUNT,to_char(a.CREATE_TIME,'yyyyMMdd') as DATETIME, a.CONSIGNEE_PROVINCE as PROVINCE 
+			FROM 
+				ECBOSS_LDO a JOIN ECBOSS_LDO_ITEM b 
+			ON 
+				a.ID=b.LDO_ID 
+			AND
+				CUSTOMER_CODE=#customerCode#
+		]]>
+		<isNotNull prepend="AND" property="skuCode">
+		        	SKU_CODE=#skuCode#
+		</isNotNull>
+		<isNotNull prepend="AND" property="whCode">
+		        	WH_CODE=#whCode#
+		</isNotNull>
+		<![CDATA[
+			AND 
+		    	a.CREATE_TIME>=to_date(#startTime#,'yyyyMMdd')
+			AND 
+				a.CREATE_TIME<=(to_date(#endTime#,'yyyyMMdd'))
+			GROUP BY 
+				a.CONSIGNEE_PROVINCE,to_char(a.CREATE_TIME,'yyyyMMdd')
+		]]>
+	</select>
+	
+	
+	<select id="SELECT_CARRIER_DISTRIBUTED" parameterClass="java.util.Map" resultMap="shippingProperties">
+		<![CDATA[
+			SELECT count(ID) AS COUNT,to_char(LASTUPDATETIME,'yyyyMMdd') AS DAYTIME,LOGISTICSPROVIDERNAME 
+			FROM 
+				ECBOSS_SHIPPING_ORDER 
+			WHERE 
+				CUSTOMERID IN (SELECT ID FROM ecboss_customer where CUSTOMERCODE=#customerCode#)
+		]]>
+		<isNotNull prepend="AND" property="wareHouseCode">
+			WAREHOUSEID IN (SELECT ID FROM ECBOSS_WAREHOUSE WHERE WAREHOUSECODE=#wareHouseCode#) 
+		</isNotNull>
+		<![CDATA[
+			 AND 
+		    	LASTUPDATETIME>=to_date(#startTime#,'yyyyMMdd')
+			 AND 
+				LASTUPDATETIME<=(to_date(#endTime#,'yyyyMMdd'))
+			 GROUP BY 
+			 	LOGISTICSPROVIDERNAME,to_char(LASTUPDATETIME,'yyyyMMdd')
+		
+			
+		]]>
+	</select>
+	
+	<select id="SELECT_CARRIER_PROMISE" parameterClass="java.util.Map" resultMap="shippingDiffProperties">
+		<![CDATA[
+		
+			SELECT count(ID) AS COUNT,to_char(SHIPPINGTIME,'yyyyMMdd') AS DAYTIME,(to_date(TO_CHAR(SIGNTIME , 'yyyy-mm-dd'), 'yyyy-mm-dd') - to_date(TO_CHAR(CREATETIME, 'yyyy-mm-dd'), 'YYYY-MM-DD')) AS DIFFTIME,LOGISTICSPROVIDERNAME
+			FROM 
+				ECBOSS_SHIPPING_ORDER 
+			WHERE 
+				CUSTOMERID IN (SELECT ID FROM ecboss_customer where CUSTOMERCODE=#customerCode#)
+			AND STATUS='SIGNED'
+		]]>
+		<isNotNull prepend="AND" property="wareHouseCode">
+			WAREHOUSEID IN (SELECT ID FROM ECBOSS_WAREHOUSE WHERE WAREHOUSECODE=#wareHouseCode#) 
+		</isNotNull>
+		<isNotNull prepend="AND" property="carrierCode">
+			LOGISTICSPROVIDERCODE=#carrierCode#
+		</isNotNull>
+		<![CDATA[
+			AND 
+		    	SHIPPINGTIME>=to_date(#startTime#,'yyyyMMdd')
+			 AND 
+				SHIPPINGTIME<=(to_date(#endTime#,'yyyyMMdd'))
+			 GROUP BY 
+			 	LOGISTICSPROVIDERNAME,to_char(SHIPPINGTIME,'yyyyMMdd'),(to_date(TO_CHAR(SIGNTIME , 'yyyy-mm-dd'), 'yyyy-mm-dd') - to_date(TO_CHAR(CREATETIME, 'yyyy-mm-dd'), 'YYYY-MM-DD'))
+		]]>
+	</select>
+	
+	<select id="SELECT_ORDER_DATA" parameterClass="java.util.Map" resultMap="orderDataProperties">
+		<![CDATA[
+			SELECT 
+				COUNT(ID) AS Order_SUM,
+				SUM(TOTALAMOUNT) AS TOTAL_MOUNT,
+				SUM(decode(STATUS,'delivered', 1, 0)) AS DELIVERED_COUNT,
+				SUM(decode(STATUS,'cancled', 1, 0)) AS CANCEL_COUNT,
+				SUM(decode(ISPAYMENTCOLLECTED,1, 1, 0)) AS PAYMENT_COUNT,
+				#endTime# AS MONTH
+			FROM
+				ECBOSS_SALESORDER
+			WHERE 
+				CUSTOMERID IN (SELECT ID FROM ecboss_customer WHERE
+		]]>
+		<iterate property="customerCode" open="(" close=")" conjunction="or">
+			CUSTOMERCODE=#customerCode[]#
+        </iterate>
+        <![CDATA[)
+		AND WAREHOUSEID IN (SELECT ID FROM ECBOSS_WAREHOUSE WHERE
+		]]>
+		<iterate property="warehouseCodes" open="(" close=")" conjunction="or">
+			WAREHOUSECODE=#warehouseCodes[]#
+        </iterate>
+		<![CDATA[)
+			 AND 
+			 	CREATETIME>=to_date(#startTime#,'yyyyMMdd')
+		]]>
+		<isNotNull prepend="AND" property="endTime">
+			<![CDATA[
+				CREATETIME<=(to_date(#endTime#,'yyyyMMdd'))
+			]]>
+		</isNotNull>
+	</select>
+	
+	<select id="SELECT_ORDER_DATA_BY_DATE" parameterClass="java.util.Map" resultMap="orderDataProperties">
+		<![CDATA[
+			SELECT
+				COUNT(ID) AS Order_SUM,
+				SUM(TOTALAMOUNT) AS TOTAL_MOUNT,
+				SUM(decode(STATUS,'delivered', 1, 0)) AS DELIVERED_COUNT,
+				SUM(decode(STATUS,'cancled', 1, 0)) AS CANCEL_COUNT,
+				SUM(decode(ISPAYMENTCOLLECTED,1, 1, 0)) AS PAYMENT_COUNT,
+				to_char(CREATETIME,'yyyyMMdd') as MONTH
+			FROM
+				ECBOSS_SALESORDER
+			WHERE 
+				CUSTOMERID IN (SELECT ID FROM ecboss_customer WHERE
+		]]>
+		<iterate property="customerCode" open="(" close=")" conjunction="or">
+			CUSTOMERCODE=#customerCode[]#
+        </iterate>
+		<![CDATA[)
+		AND WAREHOUSEID IN (SELECT ID FROM ECBOSS_WAREHOUSE WHERE
+		]]>
+		<iterate property="warehouseCodes" open="(" close=")" conjunction="or">
+			WAREHOUSECODE=#warehouseCodes[]#
+        </iterate>
+		<![CDATA[)
+			 AND 
+			 	CREATETIME>=to_date(#startTime#,'yyyyMMdd')
+		]]>
+		<isNotNull prepend="AND" property="endTime">
+			<![CDATA[
+				CREATETIME<=(to_date(#endTime#,'yyyyMMdd'))
+			]]>
+		</isNotNull>
+		<![CDATA[
+		GROUP BY to_char(CREATETIME,'yyyyMMdd')
+		]]>
+	</select>
+	
+	<select id="SELECT_SHIPPING_ORDER_DATA_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				count(a.ID) 
+			FROM 
+				ECBOSS_LDO a JOIN ECBOSS_SHIPPING_ORDER b 
+			ON 
+				a.ID=b.LDOID 
+			AND
+		]]>
+		<iterate property="customerCodes" open="(" close=")" conjunction="or">
+			a.CUSTOMER_CODE=#customerCodes[]#
+        </iterate>
+        <iterate prepend="AND" property="wareHouseCodes" open="(" close=")" conjunction="or">
+			a.WH_CODE=#wareHouseCodes[]#
+        </iterate>
+        <isNotNull prepend="AND" property="relationNo">
+        	a.RELATION_NO=#relationNo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="consigneeName">
+        	a.CONSIGNEENAME LIKE #consigneeName#
+        </isNotNull>
+        <isNotNull prepend="AND" property="consigneePhone">
+        	a.CONSIGNEE_PHONE LIKE #consigneePhone#
+        </isNotNull>
+        <isNotNull prepend="AND" property="status">
+	        <iterate property="status" open="(" close=")" conjunction="or">
+	        <![CDATA[
+	        	a.STATUS=#status[]# 
+	        ]]>
+	        </iterate>
+        </isNotNull>
+        <isNotNull prepend="AND" property="startTime">
+        	b.SHIPPINGTIME>=to_date(#startTime#,'yyyyMMdd')
+        </isNotNull>
+        <isNotNull prepend="AND" property="endTime">
+        <![CDATA[
+        	b.SHIPPINGTIME<=(to_date(#endTime#,'yyyyMMdd'))
+        ]]>
+        </isNotNull>
+        <isNotNull prepend="AND" property="shippingOrderNo">
+        	b.SHIPPINGORDERNO LIKE #shippingOrderNo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="logisticsProviderName">
+        	b.LOGISTICSPROVIDERCODE=#logisticsProviderName#
+        </isNotNull>
+        
+	</select>
+	
+	<select id="SELECT_ORDER_DETAIL_IDO" parameterClass="java.util.Map" resultMap="priceStatistic">
+			SELECT 
+				a.ID,b.SKU_CODE,b.SKU_DESCR_C,b.PRICE,b.QTY_ORDERED,a.CUSTOMER_NAME
+			FROM 
+				ECBOSS_LDO a JOIN ECBOSS_LDO_ITEM b 
+			ON 
+				a.ID=b.LDO_ID 
+			<iterate prepend="AND" property="customerCodes" open="(" close=")" conjunction="or">
+				CUSTOMER_CODE=#customerCodes[]#
+	        </iterate>
+	        <iterate prepend="AND" property="wareHouseCodes" open="(" close=")" conjunction="or">
+				WH_CODE=#wareHouseCodes[]#
+	        </iterate>
+	        <isNotNull prepend="AND" property="relationNo">
+	        	a.RELATION_NO=#relationNo#
+	        </isNotNull>
+	</select>
+	
+	<select id="SELECT_SHIPPING_ORDER_DATA" parameterClass="java.util.Map" resultMap="shippingOrderDataStatistic">
+		<![CDATA[
+			SELECT b.id,b.LDOID,a.RELATION_NO,a.WH_CODE,a.CONSIGNEENAME,a.CONSIGNEE_PHONE,b.LOGISTICSPROVIDERNAME,b.SHIPPINGORDERNO,b.WAREHOUSENAME,to_char(b.SHIPPINGTIME,'yyyy-MM-dd hh:MI:SS') as SHIPPINGTIME,a.STATUS,b.LDOCODE,b.CUBIC,b.CONSUMABLES,b.NETWEIGHT,b.GROSSWEIGHT
+			FROM 
+				ECBOSS_LDO a JOIN ECBOSS_SHIPPING_ORDER b 
+			ON 
+				a.ID=b.LDOID 
+		]]>
+		<iterate prepend="AND" property="customerCodes" open="(" close=")" conjunction="or">
+			a.CUSTOMER_CODE=#customerCodes[]#
+        </iterate>
+        <iterate prepend="AND" property="wareHouseCodes" open="(" close=")" conjunction="or">
+			a.WH_CODE=#wareHouseCodes[]#
+        </iterate>
+        <isNotNull prepend="AND" property="relationNo">
+        	a.RELATION_NO=#relationNo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="consigneeName">
+        	a.CONSIGNEENAME LIKE #consigneeName#
+        </isNotNull>
+        <isNotNull prepend="AND" property="consigneePhone">
+        	a.CONSIGNEE_PHONE LIKE #consigneePhone#
+        </isNotNull>
+        <isNotNull prepend="AND" property="status">
+        <iterate property="status" open="(" close=")" conjunction="or">
+			a.STATUS=#status[]#
+        </iterate>
+        </isNotNull>
+        <isNotNull prepend="AND" property="startTime">
+        	b.SHIPPINGTIME>=to_date(#startTime#,'yyyyMMdd')
+        </isNotNull>
+        <isNotNull prepend="AND" property="endTime">
+        <![CDATA[
+        	b.SHIPPINGTIME<=to_date(#endTime#,'yyyyMMdd')
+        ]]>
+        </isNotNull>
+        <isNotNull prepend="AND" property="shippingOrderNo">
+        	b.SHIPPINGORDERNO LIKE #shippingOrderNo#
+        </isNotNull>
+        <isNotNull prepend="AND" property="logisticsProviderName">
+        	b.LOGISTICSPROVIDERCODE=#logisticsProviderName#
+        </isNotNull>
+        <![CDATA[
+        	ORDER BY SHIPPINGTIME DESC
+        ]]>
+        
+	</select>
+	
+	<select id="SELECT_SALES_SHIPPING_ORDER_DATA" parameterClass="java.util.Map" resultMap="salesShippingStatistic">
+		<![CDATA[
+			SELECT 
+				ID,to_char(LAST_UPDATE_TIME,'yyyy-MM-dd hh:MI:SS') as LAST_UPDATE_TIME,SHIPPING_ORDER_ID,REMARK,ACCEPT_ADDRESS 
+			FROM 
+				ECBOSS_SALESORDER_SHIPPING
+			WHERE
+		]]>
+		<iterate property="shippingOrderIds" open="(" close=")" conjunction="or">
+			SHIPPING_ORDER_ID=#shippingOrderIds[]#
+        </iterate>
+        ORDER BY LAST_UPDATE_TIME DESC
+   </select>
+   
+   <select id="SELECT_SALES_ORDER_DATA" parameterClass="java.util.Map" resultMap="salesOrderProperties">
+		<![CDATA[
+			SELECT 
+				id,ORDERCODE,REFORDERCODE,ORDERSOURCE,LDOCODE,WAREHOUSEID,CUSTOMERID,to_char(ORDERTIME,'yyyy-MM-dd hh:MI:SS') as ORDERTIME,NOTE,STATUS,TOTALAMOUNT,PROVINCE,CITY,DISTRICT,PHONENUMBER,SHIPPINGADDRESS,NAME,MOBILENUMBER,EMAIL,POSTALCODE,ACCEPTFAILNOTIFYSTATUS,DELIVEREDNOTIFYSTATUS,CANCELEDNOTIFYSTATUS
+			FROM
+				ECBOSS_SALESORDER
+			WHERE 
+				CUSTOMERID IN (SELECT ID FROM ecboss_customer WHERE
+		]]>
+		<iterate property="customerCode" open="(" close=")" conjunction="or">
+			CUSTOMERCODE=#customerCode[]#
+        </iterate>
+		<![CDATA[)
+		AND WAREHOUSEID IN (SELECT ID FROM ECBOSS_WAREHOUSE WHERE
+		]]>
+		<iterate property="warehouseCodes" open="(" close=")" conjunction="or">
+			WAREHOUSECODE=#warehouseCodes[]#
+        </iterate>
+		<![CDATA[)]]>
+		<isNotNull prepend="AND" property="relationNo">
+        	REFORDERCODE=#relationNo#
+        </isNotNull>
+	</select>
+</sqlMap>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>管理后台首页</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/pages/admin/index.css">
+    <script src="../static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">方健华</span>&nbsp;&nbsp;<a href="./user-manage.html" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="./loginout.html" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="./index.html"><img src="../static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="active">
+                                        <a href="./admin-index.html" target="_self">会员管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="layout">
+                   <div class="grid">
+                       <div class="member-filter" id="member-filter">
+                           <div class="header">
+                               <form class="form-horizontal form-member-search" method="post">
+                                   <div class="control-group">
+                                       <label class="control-label label-order-id">会员名称：</label>
+                                       <div class="controls">
+                                               <input type="text" value="" style="width:100px" class="" placeholder="请输入会员名称"/>
+                                           <span class="help-inline" style="padding-left: 0px;">会员邮箱：</span>
+                                           <input type="text" value="" style="width:120px" class="" placeholder="请输入会员邮箱"/>
+                                          <span class="help-inline">可访问客户：</span>
+                                           <select class="select-sku" style="width:120px;">
+                                               <option>广州汇美服饰有限公司</option>
+                                           </select>
+                                           <span class="help-inline">可访问仓库：</span>
+                                           <select class="select-sku" style="width:112px;">
+                                               <option>所有仓库</option>
+                                           </select>
+                                           <button type="submit" class="btn btn-primary">查看</button>
+                                           <a class="btn btn-success" href="./admin-add.html" target="_self"><i class="icon-plus icon-white"></i>新增会员</a>
+                                       </div>
+                                   </div>
+
+
+                               </form>
+                           </div>
+                            <div class="content">
+                                <table class="ui-table table-member-list">
+                                    <thead>
+                                    <tr>
+                                        <th class="mname">会员姓名</th>
+                                        <th class="email">会员邮箱</th>
+                                        <th class="date">开通时间</th>
+                                        <th class="allow-customer">可访问客户</th>
+                                        <th class="allow-warehouse">可访问仓库</th>
+                                        <th class="action">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>方建华</td>
+                                            <td>jianghua.fa@126.com</td>
+                                            <td>2013-08-03 14:40:20</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>
+                                                <a href="./admin-update.html" target="_blank">修改</a>
+                                                <a href="./admin-view.html" target="_blank">查看</a>
+                                                <a class="action-del" target="_self" data-id="13444" href="#" data-mid="1">删除</a>
+                                                <a href="#modal-pwd-init" target="_self" class="action-pwd-init" data-mid="13444">密码初始化</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>方建华</td>
+                                            <td>jianghua.fa@126.com</td>
+                                            <td>2013-08-03 14:40:20</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>
+                                                <a href="./admin-update.html" target="_blank">修改</a>
+                                                <a href="./admin-view.html" target="_blank">查看</a>
+                                                <a class="action-del" target="_self" data-id="13444" href="#" data-mid="2">删除</a>
+                                                <a href="#modal-pwd-init" target="_self" class="action-pwd-init" data-mid="13444">密码初始化</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <!--table end-->
+
+               <!--page start-->
+               <div class="layout">
+                   <div class="grid">
+                       <div class="mod-pages">
+                           <div class="content">
+
+                               <div class="pagination pagination-large pagination-right">
+                                   <ul>
+                                       <li class="disabled"><a href="javascrit:void(0)" target="_self">«</a></li>
+                                       <li><a href="javascrit:void(0)" target="_self">«</a></li>
+                                       <li class="active"><a href="javascrit:void(0)" target="_self">1</a></li>
+                                       <li><a href="#">1</a></li>
+                                       <li><a href="#">2</a></li>
+                                       <li><a href="#">3</a></li>
+                                       <li><a href="#">4</a></li>
+                                       <li><a href="#">5</a></li>
+                                       <li><a href="#">»</a></li>
+                                       <li class="disabled"><a href="javascrit:void(0)" target="_self">»</a></li>
+                                   </ul>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <!--page end-->
+
+
+
+
+          </div>
+         <!--content end-->
+
+     </div>
+
+     <div id="modal-del" data-action="" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h3>您确定要删除此记录吗？</h3>
+         </div>
+         <div class="modal-body">
+             <p>此记录含有资金变动，会影响您的金额统计，请慎重考虑。删除后，您可在回收站还原，或永久删除。</p>
+         </div>
+         <div class="modal-footer">
+             <a href="#" class="btn btn-cancle">取消</a>
+             <a href="#" class="btn btn-primary btn-comfirm">确认</a>
+         </div>
+     </div>
+     <div id="modal-pwd-init" data-action="" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+             <h3>您确定要进行密码初始化吗？</h3>
+         </div>
+         <div class="modal-body">
+             <p>此动作会设置为初始密码，请慎重。</p>
+         </div>
+         <div class="modal-footer">
+             <a href="#" class="btn btn-cancle">取消</a>
+             <a href="#" class="btn btn-primary btn-comfirm">确认</a>
+         </div>
+     </div>
+
+    <script src="../static/js/pages/admin/index.js"></script>
+</body>
+</html>

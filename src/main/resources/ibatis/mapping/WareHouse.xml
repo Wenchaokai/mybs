@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="wareHouseSpace">
+	<typeAlias alias="wareHouse" type="com.best.domain.WareHouse" />
+
+	<resultMap class="wareHouse" id="allProperties">
+		<result property="id" column="ID" />
+		<result property="wareHouseName" column="WAREHOUSENAME" />
+		<result property="wareHouseCode" column="WAREHOUSECODE"/>
+		<result property="wmsOrgCode" column="WMSORGCODE"/>
+		<result property="wmsWareHouseCode" column="WMSWAREHOUSECODE" />
+	</resultMap>
+	
+	<select id="GET_ALL_WAREHOUSE" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT a.*
+			  FROM (SELECT b.*,rownum b_rownum
+			          FROM (SELECT
+				            	ID,WAREHOUSENAME,WAREHOUSECODE,WMSWAREHOUSECODE,WMSORGCODE
+				            FROM 
+				            	ECBOSS_WAREHOUSE c
+				            ORDER BY 
+				            	ID) b
+							         WHERE rownum <= #end#) a
+			 			WHERE b_rownum > #start#
+        ]]>
+	</select>
+	
+	<select id="GET_WAREHOUSE" parameterClass="java.lang.String" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	ID,WAREHOUSENAME,WAREHOUSECODE,WMSWAREHOUSECODE,WMSORGCODE
+            FROM 
+            	ECBOSS_WAREHOUSE
+            WHERE 
+            	WAREHOUSECODE=#CODE#
+        ]]>
+        
+	</select>
+	
+	<select id="GET_WAREHOUSE_ID" parameterClass="java.lang.Integer" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	ID,WAREHOUSENAME,WAREHOUSECODE,WMSWAREHOUSECODE,WMSORGCODE
+            FROM 
+            	ECBOSS_WAREHOUSE
+            WHERE 
+            	ID=#wareHouseId#
+        ]]>
+        
+	</select>
+
+</sqlMap>

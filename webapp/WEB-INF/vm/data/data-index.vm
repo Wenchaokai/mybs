@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>数据首页</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/data.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>您好！<span class="user-name">${user.userName}</span><a href="/user/user-manager.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;<a href="/user/loginout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/index.do"><img src="/static/img/logo.jpg" /></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li>
+                                        <a href="/index.do" target="_self">首页</a>
+                                    </li>
+									#if(${user.checkedSecurity(1)})
+                                    <li>
+                                        <a href="/order/order-index.do" target="_self">我要查订单</a>
+                                    </li>
+									#end
+									#if(${user.userSecurity}>2 && ${user.getCustomerCodes().size()}>0 && ${user.getWareHouseCodes().size()}>0)
+                                    <li class="active">
+                                        <a href="/data/data-index.do" target="_self">我要看数据</a>
+                                    </li>
+									#end
+									#if(${user.checkedSecurity(2)})
+                                    <li>
+                                        <a href="/user/user-bill-manager.do" target="_self">我要看账单</a>
+                                    </li>
+									#end
+                                    <li>
+                                        <a href="/user/user-manager.do?userId=${user.userId}" target="_self">我的账号</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="layout">
+                   <div class="grid">
+                       <div class="data-container">
+                             <div class="grid-main">
+                                 <div class="mod-overview">
+                                     <div class="header">
+                                         ${currentMonthStart}<span>至</span>${currentDate}
+                                     </div>
+                                     <div class="content">
+                                        <table>
+                                            <colgroup>
+                                                <col class="c1">
+                                                <col class="c2">
+                                                <col class="c3">
+                                            </colgroup>
+
+                                             <tr>
+                                                 <td>总订单量(单)：<em>${currentMonthOrderData.orderSum}</em></td>
+                                                 <td>销售额(元)：<em>${currentMonthOrderData.totalMount}</em></td>
+                                                 <td>发货量(单)：<em>${currentMonthOrderData.deliveredCount}</em></td>
+                                             </tr>
+                                             <tr>
+                                                 <td>取消订单量(单)：<em>${currentMonthOrderData.cancelCount}</em></td>
+                                                 <td>COD订单量(单)：<em>${currentMonthOrderData.paymentCount}</em></td>
+                                                 <td>&nbsp;</td>
+                                             </tr>
+                                         </table>
+                                     </div>
+                                 </div>
+
+                                 <div class="mod-detail" id="mod-detail">
+                                     <div class="header">
+                                        <h3 class="title">数据详情</h3>
+                                        <div class="action">
+                                            <button class="btn btn-mini btn-primary" type="button" data-url="${CURRENT_PRE_SEVEN_ORDER_DATA}">最近7天</button>
+                                            <button class="btn btn-mini btn-primary" type="button" data-url="${CURRENT_PRE_MONTH_ORDER_DATA}">最近30天</button>
+                                            <select class="select-date">
+												 #foreach($date in $currentDateMap.entrySet())
+													<option value="$date.value">$date.key</option>
+                                                 #end 
+                                            </select>
+                                        </div>
+                                     </div>
+                                     <div class="content">
+											#foreach($date in $currentDateMap.entrySet())
+    											<div id="mod-detail-table-container" data-url="$date.value"></div>
+    											#break
+                                            #end
+                                     </div>
+                                 </div>
+
+                                 <div class="mod-detail-chart" id="mod-detail-chart">
+                                     <div class="content">
+                                         <div id="trend-chart" data-url="${CURRENT_PRE_SEVEN_ORDER_DATA}">
+
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                            <div class="grid-sub">
+                                <div class="mod-live">
+                                    <div class="header">
+                                       <span>实时直播(12:20:90更新)</span>
+                                    </div>
+                                    <div class="content">
+                                         <ul>
+                                             <li class="first">
+                                                 已接单：<span>3,889</span>
+                                             </li>
+                                             <li>
+                                                 已订单：<span>3,889</span>
+                                             </li>
+                                             <li>
+                                                 已拣货：<span>3,889</span>
+                                             </li>
+                                             <li>
+                                                 已验货：<span>3,889</span>
+                                             </li>
+                                             <li>
+                                                 已称重：<span>3,889</span>
+                                             </li>
+                                             <li>
+                                                 已发货：<span>3,889</span>
+                                             </li>
+                                         </ul>
+                                    </div>
+                                </div>
+                                <div class="mod-enters">
+									#if(${user.checkedSecurity(4)})
+                                    <div class="item">
+                                        <a href="/data/data-store-index.do">
+                                            <img src="/static/img/pages/data/kucun.jpg" width="269" height="103"/>
+                                        </a>
+                                    </div>
+									#end
+									#if(${user.userSecurity}>=32)
+                                    <div class="item">
+                                        <a href="/data/data-carrier-index.do">
+                                            <img src="/static/img/pages/data/shuju.jpg" width="269" height="103"/>
+                                        </a>
+                                    </div>
+									#end
+									#if(${user.checkedSecurity(16)})
+                                    <div class="item">
+                                        <a href="/data/data-sku-index.do">
+                                            <img src="/static/img/pages/data/sku.jpg" width="269" height="103"/>
+                                        </a>
+                                    </div>
+									#end
+									#if(${user.checkedSecurity(8)})
+                                    <div class="item">
+                                        <a href="/data/data-order-index.do">
+                                            <img src="/static/img/pages/data/order.jpg" width="269" height="103"/>
+                                        </a>
+                                    </div>
+									#end
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+
+
+
+
+
+          </div>
+         <!--content end-->
+
+          <div class="footer clearfix" id="footer">
+                <div class="layout">
+                    <div class="grid">
+                        <div class="mod-footer">
+                            <div class="content">
+                                <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+     </div>
+	 <script src="/static/plugins/highcharts/highcharts.js"></script>
+	 <script src="/static/plugins/highcharts/modules/exporting.js"></script>
+	 <script src="/static/js/pages/data.js"></script>
+</body>
+</html>

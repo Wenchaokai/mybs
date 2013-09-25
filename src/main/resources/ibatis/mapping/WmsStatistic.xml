@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="wmsStatisticSpace">
+
+	<typeAlias alias="wmsStatistic" type="com.best.domain.WmsStatistic" />
+	<typeAlias alias="wmsWareHouse" type="com.best.domain.WMSWareHouse" />
+	
+	<!-- <resultMap class="wmsStatistic" id="allProperties">
+		<result property="qtyEach" column="QTYEACH" />
+		<result property="qtyOnholdEach" column="QTYONHOLDEACH" />
+		<result property="qtyUseEach" column="QTYUSEEACH"/>
+		<result property="qtyHold4PAEach" column="QTYHOLD4PAEACH"/>
+		<result property="dayTime" column="DAYTIME"/>
+	</resultMap> -->
+	
+	<resultMap class="wmsWareHouse" id="allWmsWareHouseProperties">
+		<result property="id" column="id" />
+		<result property="wmsWareHouseCode" column="WHCODE" />
+	</resultMap>
+	
+	<resultMap class="wmsStatistic" id="allShouldProperties">
+		<result property="qtyEach" column="QTYEACH" />
+		<result property="dayTime" column="DAYTIME"/>
+		<result property="orgId" column="ORG_ID"/>
+		<result property="skuCode" column="SKUCODE"/>
+		<result property="wareHouseId" column="WAREHOUSE_ID"/>
+		<result property="customerId" column="CUSTOMER_ID"/>
+		<result property="udf1" column="udf1"/>
+		<result property="udf2" column="udf2"/>
+		<result property="udf3" column="udf3"/>
+		<result property="udf4" column="udf4"/>
+		<result property="udf5" column="udf5"/>
+		<result property="udf6" column="udf6"/>
+		<result property="udf7" column="udf7"/>
+		<result property="udf8" column="udf8"/>
+		<result property="price" column="PRICE"/>
+		<result property="skuHigh" column="SKUHIGH"/>
+		<result property="skuLength" column="SKULENGTH"/>
+		<result property="skuWidth" column="SKUWIDTH"/>
+	</resultMap>
+
+	
+	<select id="GET_WMS_WAREHOUSE" parameterClass="java.lang.Integer" resultMap="allWmsWareHouseProperties">
+		<![CDATA[
+			SELECT 
+				ID,WHCODE
+			FROM 
+				GV_BAS_WAREHOUSE
+			WHERE 
+				ID=#ID#
+		]]>
+	</select>
+	
+	<select id="SELECT_WMS_ORDER_INFO" parameterClass="java.util.Map" resultMap="allShouldProperties">
+		<![CDATA[
+		SELECT a.*,rownum as b_rownum FROM (
+			SELECT 
+				max(to_char(a.UPDATEDTIME,'yyyy-MM-dd hh:MI:SS')) as DAYTIME,max(b.SKUCODE) AS SKUCODE,max(a.ORG_ID) AS ORG_ID,max(a.WAREHOUSE_ID) AS WAREHOUSE_ID,
+				max(a.CUSTOMER_ID) AS CUSTOMER_ID,MAX(b.UDF1) AS UDF1,MAX(b.UDF2) AS UDF2,MAX(b.UDF3) AS UDF3,MAX(b.UDF4) AS UDF4,
+				MAX(b.UDF5) AS UDF5,MAX(b.UDF6) AS UDF6,MAX(b.UDF7) AS UDF7,MAX(b.UDF8) AS UDF8,
+				MAX(b.PRICE) AS PRICE,MAX(b.SKUHIGH) AS SKUHIGH,MAX(b.SKULENGTH)SKULENGTH,MAX(b.SKUWIDTH) AS SKUWIDTH,
+				sum(a.QTYEACH) as QTYEACH 
+			FROM 
+				GV_INV_LOTLOCATIONUOM a JOIN GV_BAS_SKU b 
+			ON 
+				a.SKU_ID=b.ID
+			AND
+				a.CUSTOMER_ID IN (SELECT ID FROM GV_BAS_CUSTOMER WHERE CUSTOMERCODE=#CUSTOMERCODE#)
+		]]>
+		<isNotNull prepend="AND" property="SKUCODE">
+				b.SKUCODE=#SKUCODE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF1">
+				b.UDF1=#UDF1#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF2">
+				b.UDF2=#UDF2#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF3">
+				b.UDF3=#UDF3#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF4">
+				b.UDF4=#UDF4#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF5">
+				b.UDF5=#UDF5#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF6">
+				b.UDF6=#UDF6#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF7">
+				b.UDF7=#UDF7#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF8">
+				b.UDF8=#UDF8#
+		</isNotNull>
+		<isNotNull prepend="AND" property="PRICE">
+				b.PRICE=#PRICE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUHIGH">
+				b.SKUHIGH=#SKUHIGH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKULENGTH">
+				b.SKULENGTH=#SKULENGTH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUWIDTH">
+				b.SKUWIDTH=#SKUWIDTH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="WHCODE">
+				a.WAREHOUSE_ID IN (SELECT ID FROM GV_BAS_WAREHOUSE WHERE WHCODE=#WHCODE#) 
+		</isNotNull>
+		<isNotNull prepend="AND" property="ORGCODE">
+				a.ORG_ID IN (SELECT ID FROM GV_BAS_ORGINFO WHERE ORGCODE=#ORGCODE#)
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUCODES">
+				b.SKUCODE IN  
+		        <iterate property="SKUCODES" open="(" close=")" conjunction=",">  
+		            #SKUCODES[]#  
+		        </iterate>
+		</isNotNull>
+		<![CDATA[
+			GROUP BY a. SKU_ID) a
+			WHERE rownum <= #limit#
+		]]>
+	</select>
+	
+	<select id="SELECT_WMS_ORDER_SIZE_INFO" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+			SELECT 
+				count(b.ID)
+			FROM 
+				GV_INV_LOTLOCATIONUOM a JOIN GV_BAS_SKU b 
+			ON 
+				a.SKU_ID=b.ID
+			AND 
+				a.CUSTOMER_ID IN (SELECT ID FROM GV_BAS_CUSTOMER WHERE CUSTOMERCODE=#CUSTOMERCODE#)
+		]]>
+		<isNotNull prepend="AND" property="SKUCODE">
+				b.SKUCODE=#SKUCODE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF1">
+				b.UDF1=#UDF1#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF2">
+				b.UDF2=#UDF2#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF3">
+				b.UDF3=#UDF3#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF4">
+				b.UDF4=#UDF4#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF5">
+				b.UDF5=#UDF5#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF6">
+				b.UDF6=#UDF6#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF7">
+				b.UDF7=#UDF7#
+		</isNotNull>
+		<isNotNull prepend="AND" property="UDF8">
+				b.UDF8=#UDF8#
+		</isNotNull>
+		<isNotNull prepend="AND" property="PRICE">
+				b.PRICE=#PRICE#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUHIGH">
+				b.SKUHIGH=#SKUHIGH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKULENGTH">
+				b.SKULENGTH=#SKULENGTH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUWIDTH">
+				b.SKUWIDTH=#SKUWIDTH#
+		</isNotNull>
+		<isNotNull prepend="AND" property="WHCODE">
+				a.WAREHOUSE_ID IN (SELECT ID FROM GV_BAS_WAREHOUSE WHERE WHCODE=#WHCODE#) 
+		</isNotNull>
+		<isNotNull prepend="AND" property="ORGCODE">
+				a.ORG_ID IN (SELECT ID FROM GV_BAS_ORGINFO WHERE ORGCODE=#ORGCODE#)
+		</isNotNull>
+		<isNotNull prepend="AND" property="SKUCODES">
+				b.SKUCODE IN  
+		        <iterate property="SKUCODES" open="(" close=")" conjunction=",">  
+		            #SKUCODES[]#  
+		        </iterate>
+		</isNotNull>
+		
+		
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>会员管理-查看</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/admin/opration.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("ADMIN_USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">${user.userName}</span><a href="/admin/admin-setting-view.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/admin/admin-Logout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/admin/admin-index.do"><img src="/static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="active">
+                                        <a href="/admin/admin-index.do" target="_self">会员管理</a>
+                                    </li>
+									<li >
+                                        <a href="/admin/admin-bill-manager.do" target="_self">账单管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+							  <li><a href="/admin/admin-index.do">会员管理</a> <span class="divider">/</span></li>
+                              <li class="active">查看</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-add-member">
+                          <div class="content">
+                                <div class="field-value"><span>姓名：</span>${modifyUser.userName}</div>
+                                <div class="field-value"><span>邮箱：</span>${modifyUser.userCount}</div>
+								<div class="field-value"><span>角色：</span>
+									#if(${modifyUser.userRole}==0)
+                                        普通用户
+									#else
+										管理员
+									#end
+								</div>
+								#if(${modifyUser.userRole}==0)
+                                <div class="field-value"><span>可访问的客户：</span>
+									#foreach($customers in $customerList)
+										#foreach($customer in $customers)
+											#if(${customer.checked})
+												<span class="item">${customer.customerName}</span>
+											#end
+										#end
+									#end
+								</div>
+                                <div class="field-value"><span>可访问的仓库：</span>
+									#foreach($warehouses in $wareHouseList)
+										#foreach($warehouse in $warehouses)
+											#if(${warehouse.checked})
+												<span class="item">${warehouse.wareHouseName}</span>
+											#end
+										#end
+									#end
+								</div>
+								<div class="field-value"><span>可访问的权限：</span>
+									#if(${modifyUser.checkedSecurity(1)})
+										<span class="item">查订单</span>
+									#end
+									#if(${modifyUser.checkedSecurity(2)})
+										<span class="item">看账单</span>
+									#end
+									#if(${modifyUser.checkedSecurity(4)})
+										<span class="item">库存查询</span>
+									#end
+									#if(${modifyUser.checkedSecurity(8)})
+										<span class="item">订单来源</span>
+									#end
+									#if(${modifyUser.checkedSecurity(16)})
+										<span class="item">SKU销量省份分布</span>
+									#end
+									#if(${modifyUser.checkedSecurity(32)})
+										<span class="item">订单承运商分布</span>
+									#end
+									#if(${modifyUser.checkedSecurity(64)})
+										<span class="item">承诺时效签收情况</span>
+									#end
+								</div>
+                                <div class="field-value"><span>库存查询的筛选条件：</span>
+									#if(${modifyUser.propertyMap.get(1)})
+										<span class="item">${modifyUser.propertyMap.get(1)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(2)})
+										<span class="item">${modifyUser.propertyMap.get(2)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(3)})
+										<span class="item">${modifyUser.propertyMap.get(3)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(4)})
+										<span class="item">${modifyUser.propertyMap.get(4)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(5)})
+										<span class="item">${modifyUser.propertyMap.get(5)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(6)})
+										<span class="item">${modifyUser.propertyMap.get(6)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(7)})
+										<span class="item">${modifyUser.propertyMap.get(7)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(8)})
+										<span class="item">${modifyUser.propertyMap.get(8)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(9)})
+										<span class="item">${modifyUser.propertyMap.get(9)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(10)})
+										<span class="item">${modifyUser.propertyMap.get(10)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(11)})
+										<span class="item">${modifyUser.propertyMap.get(11)}</span>
+									#end
+									#if(${modifyUser.propertyMap.get(12)})
+										<span class="item">${modifyUser.propertyMap.get(12)}</span>
+									#end
+								</div>
+								#end
+								
+                          </div>
+						  <div class="control-group control-group-action" style="margin-top:10px;">
+                              <div class="controls">
+    							  <a class="btn" style="margin-left:25%;" href="javascript:history.go(-1);">返回列表</a>
+                              </div>
+                          </div>
+                      </div>
+					  
+                  </div>
+              </div>
+
+              <!--mod-add end--->
+
+          </div>
+         <!--content end-->
+
+         <div class="footer clearfix" id="footer">
+             <div class="layout">
+                 <div class="grid">
+                     <div class="mod-footer">
+                         <div class="content">
+                             <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+    <script src="/static/js/pages/admin/operation.js"></script>
+</body>
+</html>

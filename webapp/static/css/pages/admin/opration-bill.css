@@ -1,0 +1,99 @@
+.customer-select{
+    border:1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 10px;
+    background-color: #f7f7f9;
+}
+.customer-select ul{
+    margin: 0px;
+}
+.customer-select li{
+    width:200px;
+    height:23px;
+    float: left;
+    list-style: none;
+    padding-left: 10px;
+}
+.mod-add-member{
+    margin-bottom: 140px;
+}
+.mod-password-update .btn,
+.mod-add-member .btn{
+    padding: 6px 40px;
+    margin-left: 30px;
+    +margin-left: 20px;
+    float: left;
+    _display: inline;
+}
+.mod-add-member .control-group-fixed{
+    margin-bottom: 4px;
+}
+
+.mod-add-member  .controls{
+    margin-left: 90px;
+}
+.mod-add-member  input,
+.mod-add-member  label{
+    font-size: 12px;
+}
+.mod-add-member .control-group-action{
+    padding-top: 20px;
+}
+.mod-add-member  .field-value{
+    padding-top: 5px;
+    padding-left: 20px;
+    border-bottom: 1px solid #eee;
+    line-height: 44px;
+    font-size: 12px;
+}
+.mod-add-member  .field-value .item{
+    padding-right: 30px;
+}
+.mod-add-member .control-label{
+    width:130px;
+    text-align: left;
+    padding-left: 10px;
+}
+.mod-add-member .control-group-fixed .control-label{
+    width:300px;
+
+}
+.mod-password-update{
+    margin-bottom: 100px;
+}
+.mod-password-update   .control-label{
+    width:140px;
+    float: left;
+    line-height: 23px;
+    text-align: right;
+    font-size: 12px;
+}
+.mod-password-update   .control-label span{
+    font-size: 12px;
+    color: #c00;
+    padding-right: 3px;
+}
+.mod-password-update  .controls{
+    margin-left:10px;
+    float: left;
+    _display: inline;
+}
+.mod-password-update  .controls input{
+    font-size: 12px;
+}
+.mod-password-update .form-horizontal{
+    margin-top: 20px;
+}
+.mod-password-update .control-group{
+    margin-bottom: 24px;
+}
+.mod-password-update .hide{
+    display: none;
+}
+.mod-password-update .btn-primary{
+    margin-left: 140px;
+    padding-right: 24px;
+    padding-left: 24px;
+}

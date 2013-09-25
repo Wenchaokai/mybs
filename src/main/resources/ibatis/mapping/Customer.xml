@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customerSpace">
+	<typeAlias alias="customer" type="com.best.domain.Customer" />
+
+	<resultMap class="customer" id="allProperties">
+		<result property="id" column="ID" />
+		<result property="customerName" column="CUSTOMERNAME" />
+		<result property="customerCode" column="CUSTOMERCODE" />
+	</resultMap>
+	
+	<select id="GET_ALL_CUSTOMER" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+			SELECT a.*
+			  FROM (SELECT b.*,rownum b_rownum
+			          FROM (SELECT ID,CUSTOMERNAME,CUSTOMERCODE
+			                  FROM ECBOSS_CUSTOMER c WHERE ISACTIVIE=1
+			                 ORDER BY CUSTOMERNAME) b
+			         WHERE rownum <= #end#) a
+			 WHERE b_rownum > #start#
+        ]]>
+	</select>
+	
+	<select id="GET_CUSTOMER_ID" parameterClass="java.lang.Integer" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	ID,CUSTOMERNAME,CUSTOMERCODE
+            FROM 
+            	ECBOSS_CUSTOMER
+            WHERE ID=#customerId#
+        ]]>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>订单详情</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/order-detail.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p><i class="icon-user"></i><span class="user-name">${user.userName}</span><a href="/user/user-manager.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/user/loginout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/index.do"><img src="/static/img/logo.jpg" /></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li>
+                                        <a href="/index.do" target="_self">首页</a>
+                                    </li>
+									#if(${user.checkedSecurity(1)})
+                                    <li class="active">
+                                        <a href="/order/order-index.do" target="_self">我要查订单</a>
+                                    </li>
+									#end
+									#if(${user.userSecurity}>2 && ${user.getCustomerCodes().size()}>0 && ${user.getWareHouseCodes().size()}>0)
+                                    <li>
+                                        <a href="/data/data-index.do" target="_self">我要看数据</a>
+                                    </li>
+									#end
+									#if(${user.checkedSecurity(2)})
+                                    <li>
+                                        <a href="/user/user-bill-manager.do" target="_self">我要看账单</a>
+                                    </li>
+									#end
+                                    <li>
+                                        <a href="/user/user-manager.do?userId=${user.userId}" target="_self">我的账号</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+                              <li><a href="/index.do"><span style="font-size:14px">首页</span></a> <span class="divider">/</span></li>
+                              <li><a href="/order/order-index.do"><span style="font-size:14px">我要查订单</span></a> <span class="divider">/</span></li>
+                              <li class="active">详情</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <!--mod-order-detail start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-order-detail">
+                           <div class="content">
+                               <!--订单跟踪信息 start-->
+                               <div class="item clearfix">
+                                    <div class="item-header">
+                                        <span class="title">订单跟踪信息</span>
+                                    </div>
+                                    <div class="item-content">
+                                        <!--package1 start-->
+										#set($index=1) 
+										#foreach($orderData in $shippingOrderData)
+											<div class="package">
+                                                 <div class="package-header">
+                                                      <table class="package-h-table">
+                                                          <colgroup>
+                                                              <col class="package-name">
+                                                              <col class="express">
+                                                              <col class="express-id">
+                                                              <col class="time">
+                                                          </colgroup>
+                                                          <tbody>
+                                                            <tr>
+                                                                <td>包裹${index}：${orderData.ldoCode}-${index}</td>
+                                                                <td>承运商：${orderData.logisticsProviderName}</td>
+                                                                <td>快递运单号：${orderData.shippingOrderNo}</td>
+                                                                <td>发货时间：${orderData.shippingTime}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="4">仓库：${orderData.wareHouseName}</td>
+                                                            </tr>
+                                                          </tbody>
+                                                      </table>
+                                                 </div>
+											</div>
+											<div class="package-content">
+                                                 <table class="ui-table package-desc-table" style="width:100%;margin-left:0%;">
+                                                     <thead>
+                                                        <tr>
+                                                            <th class="time" style="width:20%">时间</th>
+                                                            <th class="operate-desc" style="width:60%">处理描述</th>
+                                                            <th class="operator" style="width:20%">处理地点</th>
+                                                        </tr>
+                                                     </thead>
+                                                     <tbody>
+														#foreach($salesShipping in $orderData.salesShippings)
+															<tr>
+                                                                <td>${salesShipping.lastUpdateTime}</td>
+                                                                <td>${orderData.ldoCode}${salesShipping.remark}</td>
+                                                                <td>${salesShipping.acceptAddress}</td>
+                                                            </tr>
+														#end
+                                                     </tbody>
+                                                 </table>
+                                             </div>
+											#set($index=${index}+1) 
+											<br />
+										#end
+                                        
+                                    </div>
+                               </div>
+                               <!--订单跟踪信息 end-->
+                               <!--订单基本信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">订单跟踪信息</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <table class="package-sale-table">
+                                                   <colgroup>
+                                                       <col class="sale-id">
+                                                       <col class="order-id">
+                                                       <col class="bs-id">
+                                                       <col class="source">
+                                                   </colgroup>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td>销售平台订单号：${salesOrder.refOrderCode}</td>
+                                                           <td>ERP订单号：${salesOrder.orderCode}</td>
+                                                           <td>物流订单号：${salesOrder.ldoCode}</td>
+                                                           <td>订单来源：${salesOrder.orderSource}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>仓库：${salesOrder.wareHouseName}</td>
+                                                           <td>公司名称：${salesOrder.customerName}</td>
+                                                           <td>接单时间：${salesOrder.orderTime}</td>
+														   <td>订单状态：${salesOrder.statusName}</td>
+                                                       </tr>
+													   <tr>
+                                                           <td colspan="4">总金额：${salesOrder.totalAmount}元</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td colspan="4">订单备注：${salesOrder.note}</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+
+                               <!--收货人信息 end-->
+                               <!--收货人信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">收货人信息</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <table class="package-sale-table">
+                                                   <colgroup>
+                                                       <col class="sale-id">
+                                                       <col class="order-id">
+                                                       <col class="bs-id">
+                                                       <col class="source">
+                                                   </colgroup>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td>收货人：${salesOrder.userName}</td>
+                                                           <td>手机/电话：${salesOrder.mobilePhone}</td>
+                                                           <td>邮编：${salesOrder.postalCode}</td>
+                                                           <td>E-MAIL：${salesOrder.email}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td colspan="4">地址：${salesOrder.province} ${salesOrder.city} ${salesOrder.district} ${salesOrder.shippingAddress}</td>
+                                                       </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <!--订单基本信息 end-->
+
+                               <!--订单包含商品信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">订单包含商品信息</span>
+                                   </div>
+                                   <div class="item-content">
+                                       <div class="package">
+                                           <div class="package-content">
+                                               <table class="ui-table package-desc-table" style="margin-left:3%;width:94%;">
+                                                   <thead>
+                                                       <tr>
+                                                           <th class="code">编码</th>
+                                                           <th class="offer-name">名称</th>
+                                                           <th class="price">单价</th>
+                                                           <th class="offer-count">数量</th>
+                                                       </tr>
+                                                   </thead>
+                                                   <tbody>
+													#foreach($obj in $merchInfo)
+														<tr>
+                                                           <td>${obj.skuCode}</td>
+                                                           <td>${obj.skuDesc}</td>
+                                                           <td>${obj.price}</td>
+                                                           <td>${obj.qtyOrdered}</td>
+                                                       </tr>
+													#end
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                               <!--订单包含商品信息 end-->
+
+                               <!--发货信息 start-->
+                               <div class="item clearfix">
+                                   <div class="item-header">
+                                       <span class="title">发货信息</span>
+                                   </div>
+
+                                   <div class="item-content">
+
+                                       <!--mod发货包裹信息 start-->
+                                       <div class="package">
+                                           <div class="package-header">
+                                               <h3>• 发货包裹信息（共${shippingOrderData.size()}个包裹）</h3>
+                                           </div>
+										   #set($index=1) 
+										   #foreach($orderData in $shippingOrderData)
+											<div class="package-content" style="margin-top:10px;">
+                                               <table class="post-package-table">
+                                                   <colgroup>
+                                                       <col class="col1">
+                                                       <col class="col2">
+                                                       <col class="col3">
+                                                       <col class="col4">
+                                                   </colgroup>
+                                                   <tbody>
+                                                       <tr>
+                                                           <td colspan="4">包裹${index}：${orderData.ldoCode}-${index}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>承运商：${orderData.logisticsProviderName}</td>
+                                                           <td>快递运单号：${orderData.shippingOrderNo}</td>
+                                                           <td>净重（KG）：${orderData.netWeight}</td>
+                                                           <td>毛重（KG）：${orderData.grossWeight}</td>
+                                                       </tr>
+                                                       <tr>
+                                                           <td>体积（M3）：${orderData.cubic}</td>
+                                                           <td>耗材：${orderData.consumable}</td>
+                                                           <td colspan="2">发货时间：${orderData.shippingTime}</td>
+                                                       </tr>
+													   <tr>
+														<td>包含商品</td>
+													   </tr>
+													   <tr>
+														<td  colspan="4">
+															<div class="package-content" style="margin-bottom:5px;margin-right:5px;">
+                                                               <table class="ui-table package-desc-table">
+                                                                   <thead>
+                                                                       <tr>
+                                                                           <th class="code">编码</th>
+                                                                           <th class="offer-name">名称</th>
+                                                                           <th class="price">单价</th>
+                                                                           <th class="offer-count">数量</th>
+                                                                           <th class="supply">供应商</th>
+                                                                       </tr>
+                                                                   </thead>
+                                                                   <tbody>
+            															#foreach($obj in $orderData.idoStatistics)
+            																<tr>
+                                                                               <td>${obj.skuCode}</td>
+                                                                               <td>${obj.skuDesc}</td>
+                                                                               <td>${obj.price}</td>
+                                                                               <td>${obj.qtyOrdered}</td>
+            																   <td>${obj.customerName}</td>
+                                                                           </tr>
+            															#end
+                                                                   </tbody>
+                                                               </table>
+                                                           </div>
+														</td>
+													   </tr>
+                                                   </tbody>
+                                               </table>
+											   
+                                           </div>
+										   
+												#set($index=${index}+1) 
+										   #end
+                                           
+                                       </div>
+                                       <!--mod发货包裹信息 end-->
+                                       
+                                   </div>
+
+                               </div>
+                               <!--发货信息 end-->
+                           </div>
+                      </div>
+                  </div>
+              </div>
+               <!--mod-order-detail end-->
+
+
+
+
+
+          </div>
+         <!--content end-->
+
+          <div class="footer clearfix" id="footer">
+                <div class="layout">
+                    <div class="grid">
+                        <div class="mod-footer">
+                            <div class="content">
+                                <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+     </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>管理后台-登录页面</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/pages/admin/login.css">
+    <script src="../static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+     <div class="doc" id="doc">
+         <div class="header" id="header">
+             <div class="layout">
+                 <div class="grid">
+                     <div class="mod-masthead">
+                         <a href="./index.html"><img src="../static/img/logo.jpg" /></a>
+                         <span class="admin">管理后台</span>
+                     </div>
+                 </div>
+             </div>
+         </div>
+          <div class="content" id="content">
+               <div class="layout">
+                   <div class="grid">
+                       <div class="mod-login">
+                           <div class="wrap clearfix">
+                               <form action="" method="post" id="login-form" class="form-horizontal">
+                                   <fieldset>
+                                       <legend>用户登录</legend>
+                                       <div class="ui-form-content">
+                                           <div class="error-box">此用户名不存在!</div>
+                                           <div class="control-group">
+                                               <label class="control-label" for="user_name">用户名：</label>
+                                               <div class="controls">
+                                                   <input type="text" placeholder="请输入用户名" name="user_name" id="user_name">
+                                                   <span class="help-inline hide">密码不能为空</span>
+                                               </div>
+                                           </div>
+                                           <div class="control-group">
+                                               <label class="control-label" for="pwd">密码：</label>
+                                               <div class="controls">
+                                                   <input type="text" placeholder="请输入密码" name="password" id="pwd">
+                                                   <span class="help-inline hide">密码不能为空</span>
+                                               </div>
+                                           </div>
+                                           <button type="submit" class="btn btn-block btn-primary btn-success">登录</button>
+                                       </div>
+                                   </fieldset>
+                               </form>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+          </div>
+
+     </div>
+     <script src="../static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="../static/js/pages/admin/login.js"></script>
+</body>
+</html>

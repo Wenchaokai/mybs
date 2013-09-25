@@ -1,0 +1,29 @@
+.topbar{
+    width: 100%;
+    height: 26px;
+    background: #5a7bb0;
+    _overflow: hidden;
+	color:#d2e3ff;
+}
+.mod-toolbar{
+    height: 26px;
+    line-height:26px;
+    font-size: 12px;
+}
+.mod-toolbar .user-name{
+    color:#fff;
+    padding-right: 6px;
+	font-weight:bold;
+}
+.mod-toolbar p{
+    float: right;
+    padding-right: 40px;
+    text-align: right;
+}
+.mod-toolbar a.login{
+    margin-left: 10px;
+}
+.mod-toolbar a:link,
+.mod-toolbar a:visited{
+	color:#d2dceb;
+}

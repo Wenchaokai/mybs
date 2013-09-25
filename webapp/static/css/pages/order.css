@@ -1,0 +1,76 @@
+.order-filter{
+	font-size:12px;
+}
+.order-filter .form-horizontal{
+    padding-top: 20px;
+}
+.order-filter .form-horizontal .label-order-id{
+    width:78px;
+	font-size:12px;
+    float: left;
+    padding-top: 5px;
+    height: 23px;
+    line-height: 23px;
+}
+.order-filter .form-horizontal  input,
+.order-filter .form-horizontal  button,
+.order-filter .form-horizontal  .btn-success{
+	font-size:12px;
+}
+.order-filter .form-horizontal  .btn-primary{
+    margin-left: 18px;
+}
+.order-filter .form-horizontal  select{
+	font-size:12px;
+    height: 30px;
+    line-height: 30px;
+    margin: -2px;
+}
+.ui-datepicker-append{
+    display: none;
+}
+.select-c{
+    border: 1px solid #ccc;
+}
+.order-filter .form-horizontal  .controls{
+    margin-left: 0px;
+    _display: inline;
+    padding-left: 0px;
+    float: left;
+}
+
+.table-order-list th.oid{
+   width:110px;
+}
+.table-order-list th.warehouse{
+    width: 108px;
+}
+.table-order-list th.people{
+   width: 50px;
+}
+.table-order-list th.name{
+    width: 150px;
+}
+.table-order-list th.phone{
+      width: 92px;
+}
+.table-order-list th.time{
+   width:110px;
+}
+.table-order-list th.posttime{
+   width: 110px;
+}
+.table-order-list th.state{
+   width: 100px;
+}
+.table-order-list th.action{
+    width: 50px;
+}
+
+.mod-no-result .no-result {
+    height: 100px;
+    line-height: 40px;
+    padding-top: 40px;
+    background: transparent url(../../img/pages/icon-no-result.png) no-repeat 320px 42px;
+    padding-left: 360px;
+}

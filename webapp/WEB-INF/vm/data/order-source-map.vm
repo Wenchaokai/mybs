@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<head>
+<meta "charset=utf-8" />
+<title>订单来源地图</title>
+ <script src="/static/js/lib/lib.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=46ce9d0614bf7aefe0ba562f8cf87194&v=1.3&services=true"></script>
+<link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/map.css">
+</head>
+<body>
+<div class="doc" id="doc">
+	<div class="wrap">
+		<div id="map_container" data-url="/json/${skuCode}/${mapFile}"></div>
+
+			<div class="rate-show">
+				<ul>
+					<li><span class="block" style="background-color:#FFFFB2;"></span>0-0.5%</li>
+					<li><span class="block" style="background-color:#FECC5C;"></span>0.5%-2%</li>
+					<li><span class="block" style="background-color:#FD8D3C;"></span>2%-5%</li>
+					<li><span class="block" style="background-color:#F03B20;"></span>5%-8%</li>
+					<li><span class="block" style="background-color:#BD0026;"></span>8+%</li>
+				</ul>
+			</div>
+			<div class="about-project">
+			   <p>时间周期：${startTime} - ${endTime}</p>
+			   <p>所在仓库：${wareHouseName} </p>
+			   #if(${isSku})
+				<p>SKU编码：${currentSku} </p>
+				<p>SKU名称：${skuName} </p>
+			   #end
+			   <p>订单总量：${totalCount} （单）</p>
+			</div>
+	</div>
+</div>
+<script src="/static/js/pages/map.js"></script>
+</body>
+</html>
+
+

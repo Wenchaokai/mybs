@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="billTypeSpace">
+	<typeAlias alias="billType" type="com.best.domain.BillType" />
+
+	<resultMap class="billType" id="allProperties">
+		<result property="id" column="id" />
+		<result property="billType" column="bill_type" />
+		<result property="billName" column="bill_name" />
+	</resultMap>
+	
+	<select id="GET_ALL_BILL_TYPE_INFO" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	*
+            FROM 
+            	billtype
+            ORDER BY 
+            	bill_type
+        ]]>
+	</select>
+
+</sqlMap>

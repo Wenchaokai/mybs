@@ -1,0 +1,96 @@
+.mod-member-manage .ui-table th.account{
+
+}
+.mod-member-manage .ui-table th.name{
+    width: 140px;
+}
+.mod-member-manage .ui-table th.role{
+    width: 150px;
+}
+.mod-member-manage .ui-table th.opration{
+    width: 200px;
+}
+.mod-member-manage .btn-del{
+    margin-left: 10px;
+}
+.mod-member-show .content{
+    padding-top: 14px;
+}
+.mod-member-show .btn{
+    padding: 10px 40px;
+    margin-right: 20px;
+}
+.mod-member-show  .btn-update-pwd{
+    margin-left: 10px;
+    color:#ff0017;
+    text-decoration: underline;
+}
+.mod-no-result .no-result{
+    height: 40px;
+    line-height: 40px;
+    padding-top: 40px;
+    background: transparent url(../../img/pages/icon-no-result.png) no-repeat 140px 42px;
+    padding-left: 180px;
+}
+.mod-set{
+	color:#4f526a;
+    font-size: 12px;
+}
+.mod-set label{
+    font-size: 12px;
+}
+.mod-set .header{
+	height:52px;
+	line-height:52px;
+	width:784px;
+	border-bottom:1px solid #ccc;
+	margin:0 auto;
+	margin-bottom:20px;
+    overflow: hidden;
+}
+.mod-set .header h2{
+    font-size:16px;
+	color:#555;
+    margin: 0px;
+    padding-top: 6px;
+}
+.mod-set .control-label span{
+	color:#c00;
+	padding-right:4px;
+}
+.mod-set  .btn{
+    padding:8px 20px;
+    margin-right: 12px;
+}
+.mod-member-show{
+	color:#4f526a;
+    font-size: 12px;
+}
+.mod-set input{
+    font-size: 12px;
+}
+
+.mod-member-show .info-show{
+	width:784px;
+    font-size: 12px;
+}
+.mod-member-show .info-show tr.hover{
+    background-color: #fffae2;
+}
+.mod-member-show .info-show td{
+	height:36px;
+	border-bottom:1px solid #F0F0F0;
+	padding-left:20px;
+}
+.mod-member-show .info-show td.field{
+	width:130px;
+	text-align:right;
+}
+.mod-member-show .info-show td a:link,
+.mod-member-show .info-show td a:visited{
+	color:#447bd6;
+    text-decoration: none;
+}
+
+
+

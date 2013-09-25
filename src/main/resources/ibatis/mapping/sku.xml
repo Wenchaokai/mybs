@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="skuSpace">
+	<typeAlias alias="sku" type="com.best.domain.SKU" />
+
+	<resultMap class="sku" id="allProperties">
+		<result property="skuName" column="SKU_NAME" />
+		<result property="skuCode" column="SKU_CODE" />
+	</resultMap>
+	
+	<select id="GET_SKU" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	SKU_NAME,SKU_CODE
+            FROM 
+            	ECBOSS_SKU
+            WHERE
+            	SKU_CODE=#SKUCODE#
+        ]]>
+	</select>
+	
+	<select id="GET_SKU_BY_NAME" parameterClass="java.util.Map" resultClass="java.lang.String">
+		<![CDATA[
+            SELECT
+            	SKU_CODE
+            FROM 
+            	ECBOSS_SKU
+            WHERE
+            	SKU_NAME LIKE #SKUNAME#
+        ]]>
+	</select>
+
+</sqlMap>

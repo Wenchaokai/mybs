@@ -1,0 +1,64 @@
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #ff0017;
+    text-decoration: underline;
+}
+#header{
+	background-color:#efefef;
+    height: 62px;
+}
+#header.header-login{
+    border-bottom: 2px solid #08C;
+    height: 80px;
+}
+#header .grid{
+
+}
+.mod-masthead{
+    height: 60px;
+    overflow:hidden;
+    width: 100%;
+    position: relative;
+}
+
+.mod-masthead img{
+    display: block;
+    width: 174px;
+    height: 55px;
+    float:left;
+    margin: 0px;
+    padding: 0px;
+}
+.mod-masthead a{
+    display: block;
+    width: 174px;
+    height: 55px;
+    overflow: hidden;
+}
+.mod-masthead span.admin{
+    position: absolute;
+    display: block;
+    height: 36px;
+    left: 198px;
+    top: 14px;
+    border-left: 1px solid #ccc;
+    padding-left: 18px;
+    font-size: 24px;
+    line-height:36px;
+    color: #222;
+    font-family: 'microsoft yahei', Verdana, Arial, Helvetica, sans-serif;
+}

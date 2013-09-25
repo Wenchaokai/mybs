@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>更新账单</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/admin/opration-bill.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("ADMIN_USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">${user.userName}</span><a href="/admin/admin-setting-view.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/admin/admin-Logout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/admin/admin-index.do"><img src="/static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li >
+                                        <a href="/admin/admin-index.do" target="_self">会员管理</a>
+                                    </li>
+									<li class="active">
+                                        <a href="/admin/admin-bill-manager.do" target="_self">账单管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+                              <li><a href="/admin/admin-bill-manager.do">账单管理</a> <span class="divider">/</span></li>
+                              <li class="active">更新账单</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-add-member">
+                          <div class="content">
+                              <form class="form-horizontal" name="bill-form" id="bill-form" action="/admin/admin-update-bill.do" method="post" enctype="multipart/form-data">
+                                  <input type="text" placeholder="请输入账单金额" id="billId" name="billId" value="${bill.billId}" class="hide">
+								  <div class="control-group">
+                                      <label class="control-label" for="">请选择账单类型：</label>
+                                      <div class="controls">
+                                          <select class="select-sku" style="width:112px;font-size:12px;" id="billType" name="billType">
+											   #foreach($billType in $billTypes)
+													<option value="${billType.billType}" #if(${billType.checked}) selected #end>${billType.billName}</option>
+												#end
+                                           </select>
+                                      </div>
+                                  </div>
+                                  <div class="control-group #if (${memberExisted}) error #end">
+                                      <label class="control-label" for="">请选择账单时间：</label>
+                                      <div class="controls">
+                                         <select class="select-sku" style="width:112px;font-size:12px;" id="billYear" name="billYear">
+    										 #foreach($tmp in $years)
+													<option value="${tmp}" #if(${tmp}==${year}) selected #end>${tmp}</option>
+												#end
+                                           </select>
+										   年
+										   <select class="select-sku" style="width:112px;font-size:12px;" id="billMonth" name="billMonth">
+    										 #foreach($tmp in $months)
+													<option value="${tmp}" #if(${month}==${tmp}) selected #end>${tmp}</option>
+												#end
+                                           </select>
+										   月
+                                      </div>
+                                  </div>
+								  <div class="control-group">
+                                    <label class="control-label" for="userRole">请选择客户：</label>
+                                    <div class="controls">
+                                        <select class="select-sku" style="width:250px;font-size:12px;" id="customerSelected" name="customerSelected">
+												#foreach($customer in $customers)
+													<option value="${customer.customerCode}#${customer.customerName}" #if(${customer.checked}) selected #end>${customer.customerName}</option>
+												#end
+                                           </select>
+                                    </div>
+                                </div>
+								<div class="control-group">
+                                    <label class="control-label" for="userRole">请选择仓库：</label>
+                                    <div class="controls">
+                                        <select class="select-sku" style="width:250px;font-size:12px;" id="warehouseSelected" name="warehouseSelected">
+											   #foreach($warehouse in $wareHouses)
+													<option value="${warehouse.wareHouseCode}#${warehouse.wareHouseName}" #if(${warehouse.checked}) selected #end>${warehouse.wareHouseName}</option>
+												#end
+                                           </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="userRole">请输入账单金额：</label>
+                                    <div class="controls">
+                                        <input type="text" placeholder="请输入账单金额" id="billAccount" name="billAccount" value="${bill.billAccount}" >
+                                    </div>
+                                </div>
+								<div class="control-group hide">
+                                    <label class="control-label" for="userRole">上传汇总账单：</label>
+                                    <div class="controls">
+                                        <input type="file" name="summaryFile" id="summaryFile"><br>  
+                                    </div>
+                                </div>
+								<div class="control-group">
+                                    <label class="control-label" for="userRole">上传账单：</label>
+                                    <div class="controls">
+                                        <input type="file" name="detailFile" id="detailFile"><br>  
+                                    </div>
+                                </div>
+
+								<div class="control-group control-group-action">
+                                      <div class="controls">
+                                          <button type="submit" class="btn btn-primary">确定</button>
+                                          <a class="btn" href="javascript:history.go(-1);">取消</a>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add end--->
+
+          </div>
+         <!--content end-->
+
+     </div>
+     <script src="/static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="/static/js/pages/admin/operation.js"></script>
+</body>
+</html>

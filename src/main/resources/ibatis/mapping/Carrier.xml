@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="carrierSpace">
+	<typeAlias alias="carrier" type="com.best.domain.Carrier" />
+
+	<resultMap class="carrier" id="allProperties">
+		<result property="id" column="id" />
+		<result property="carrierCode" column="carrier_code" />
+		<result property="carrierName" column="carrier_name" />
+	</resultMap>
+	
+	<select id="GET_ALL_CARRIER_INFO" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	*
+            FROM 
+            	carrier
+            ORDER BY 
+            	carrier_code
+        ]]>
+	</select>
+
+</sqlMap>

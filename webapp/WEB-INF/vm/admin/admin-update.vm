@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>会员管理-更新用户</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/admin-nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/pages/admin/opration-admin.css">
+    <script src="/static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+	#set($user=$session.getAttribute("ADMIN_USERS")) 
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">${user.userName}</span><a href="/admin/admin-setting-view.do?userId=${user.userId}" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="/admin/admin-Logout.do" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="/admin/admin-index.do"><img src="/static/img/logo.jpg" /></a>
+                          <span class="admin">管理后台</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="active">
+                                        <a href="/admin/admin-index.do" target="_self">会员管理</a>
+                                    </li>
+									<li >
+                                        <a href="/admin/admin-bill-manager.do" target="_self">账单管理</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-breadcrumb">
+                          <ul class="breadcrumb">
+                              <li><a href="/admin/admin-index.do">会员管理</a> <span class="divider">/</span></li>
+                              <li class="active">查看用户</li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add start-->
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-add-member">
+                          <div class="content">
+                              <form class="form-horizontal" name="member-form" id="member-form" action="/admin/update-member.do" method="post">
+                                  <input type="text" placeholder="请输入姓名" class="hide" id="userId" name="userId" value="${modifyUser.userId}">
+								  <div class="control-group">
+                                      <label class="control-label" for="">请输入姓名：</label>
+                                      <div class="controls">
+                                          <input type="text" placeholder="请输入姓名" id="userName" name="userName" value="${modifyUser.userName}" >
+										  <span class="help-inline hide">用户名不能为空</span>
+                                      </div>
+                                  </div>
+                                  <div class="control-group #if (${memberExisted}) error #end">
+                                      <label class="control-label" for="">请输入邮箱：</label>
+									  <label class="control-label" for="">${modifyUser.userCount}</label>
+                                      <div class="controls hide">
+                                          <input type="text"  placeholder="请输入邮箱" id="userCount" name="userCount" value="${modifyUser.userCount}"  disabled>
+                                      </div>
+                                  </div>
+								  <div class="control-group">
+                                        <label class="control-label" for="userRole">角色：</label>
+                                        <div class="controls">
+        									#if(${modifyUser.userRole}==0)
+                                                <label class="radio inline">
+                                                    <input type="radio" id="userRole" name="userRole" value="1"> 管理员
+                                                </label>
+                                                <label class="radio inline">
+                                                    <input type="radio" id="userRole" name="userRole" value="0" checked> 普通用户
+                                                </label>
+        									#else
+        										<label class="radio inline">
+                                                    <input type="radio" id="userRole" name="userRole" value="1" checked> 管理员
+                                                </label>
+                                                <label class="radio inline">
+                                                    <input type="radio" id="userRole" name="userRole" value="0"> 普通用户
+                                                </label>
+        									#end
+                                        </div>
+                                    </div>
+                                  <div class="control-group control-group-fixed #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <label class="control-label" for="">可访问的客户：</label>
+                                  </div>
+                                  <div class="control-group#if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <div class="customer-select clearfix" id="customer-select" name="customer-select">
+											#foreach($customers in $customerList)
+													<ul>
+													#foreach($customer in $customers)
+                                                        <li>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="userCustomer" value="${customer.customerCode}#${customer.customerName}" #if(${customer.checked}) checked #end >
+                                                                ${customer.customerName}
+                                                            </label>
+                                                        </li>
+													#end
+													</ul>
+												#end
+                                      </div>
+                                  </div>
+                                  <div class="control-group control-group-fixed #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <label class="control-label" for="">可访问的仓库：</label>
+                                  </div>
+                                  <div class="control-group #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <div class="customer-select clearfix" id="warehouse-select" name="warehouse-select">
+											#foreach($warehouses in $wareHouseList)
+													<ul>
+													#foreach($warehouse in $warehouses)
+                                                        <li>
+                                                            <label class="checkbox">
+                                                                <input type="checkbox" name="userWareHouse" value="${warehouse.wareHouseCode}#${warehouse.wareHouseName}" #if(${warehouse.checked}) checked #end>
+                                                                ${warehouse.wareHouseName}
+                                                            </label>
+                                                        </li>
+													#end
+													</ul>
+												#end
+                                      </div>
+                                  </div>
+								  <div class="control-group control-group-fixed #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <label class="control-label" for="">可访问的权限：</label>
+                                  </div>
+                                  <div class="control-group #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <div class="customer-security-select clearfix" id="security-select" name="security-select">
+                                          <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="1" #if(${modifyUser.checkedSecurity(1)}) checked#end>查订单
+                                                  </label>
+                                              </li>
+                                          </ul>
+										  <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="2" #if(${modifyUser.checkedSecurity(2)}) checked#end>看账单
+                                                  </label>
+                                              </li>
+                                          </ul>
+										  <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="4" #if(${modifyUser.checkedSecurity(4)}) checked#end>库存查询
+                                                  </label>
+												  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="8" #if(${modifyUser.checkedSecurity(8)}) checked#end>订单来源
+                                                  </label>
+												  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="16" #if(${modifyUser.checkedSecurity(16)}) checked#end>SKU销量省份分布
+                                                  </label>
+												  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="32" #if(${modifyUser.checkedSecurity(32)}) checked#end>订单承运商分布
+                                                  </label>
+												  <label class="checkbox">
+                                                      <input type="checkbox" name="security" value="64" #if(${modifyUser.checkedSecurity(64)}) checked#end>承诺时效签收情况
+                                                  </label>
+                                              </li>
+                                              
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <div class="control-group control-group-fixed #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <label class="control-label" for="">库存查询的筛选条件：</label>
+                                  </div>
+                                  <div class="control-group #if(${modifyUser.userRole}==1) hide #end" id="role-group" name="role-group">
+                                      <div class="customer-properties-select clearfix" id="properties-select" name="properties-select">
+                                          <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="1" #if(${modifyUser.propertyMap.get(1)}) checked #end>自定义属性1
+                                                  </label>
+												  <label >
+													  <input type="text" name="userProperties1" id="userProperties1" #if(${modifyUser.propertyMap.get(1)}) value="${modifyUser.propertyMap.get(1)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="5" #if(${modifyUser.propertyMap.get(5)}) checked #end>自定义属性5
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties5" id="userProperties5" #if(${modifyUser.propertyMap.get(5)}) value="${modifyUser.propertyMap.get(5)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+											  <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="9" #if(${modifyUser.propertyMap.get(9)}) checked #end>自定义长度
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties9" id="userProperties9" #if(${modifyUser.propertyMap.get(9)}) value="${modifyUser.propertyMap.get(9)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                          </ul>
+										  <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="2" #if(${modifyUser.propertyMap.get(2)}) checked #end>自定义属性2
+                                                  </label>
+												  <label >
+													  <input type="text" name="userProperties2" id="userProperties2" #if(${modifyUser.propertyMap.get(2)}) value="${modifyUser.propertyMap.get(2)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="6" #if(${modifyUser.propertyMap.get(6)}) checked #end>自定义属性6
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties6" id="userProperties6" #if(${modifyUser.propertyMap.get(6)}) value="${modifyUser.propertyMap.get(6)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+											  <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="10" #if(${modifyUser.propertyMap.get(10)}) checked #end>自定义宽度
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties10" id="userProperties10" #if(${modifyUser.propertyMap.get(10)}) value="${modifyUser.propertyMap.get(10)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                          </ul>
+										  <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="3" #if(${modifyUser.propertyMap.get(3)}) checked #end>自定义属性3
+                                                  </label>
+												  <label >
+													  <input type="text" name="userProperties3" id="userProperties3" #if(${modifyUser.propertyMap.get(3)}) value="${modifyUser.propertyMap.get(3)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="7" #if(${modifyUser.propertyMap.get(7)}) checked #end>自定义属性7
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties7" id="userProperties7" #if(${modifyUser.propertyMap.get(7)}) value="${modifyUser.propertyMap.get(7)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+											  <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="11" #if(${modifyUser.propertyMap.get(11)}) checked #end>自定义高度
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties11" id="userProperties11" #if(${modifyUser.propertyMap.get(11)}) value="${modifyUser.propertyMap.get(11)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                          </ul>
+										  <ul>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="4" #if(${modifyUser.propertyMap.get(4)}) checked #end>自定义属性4
+                                                  </label>
+												  <label >
+													  <input type="text" name="userProperties4" id="userProperties4" #if(${modifyUser.propertyMap.get(4)}) value="${modifyUser.propertyMap.get(4)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                              <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="8" #if(${modifyUser.propertyMap.get(8)}) checked #end>自定义属性8
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties8" id="userProperties8" #if(${modifyUser.propertyMap.get(8)}) value="${modifyUser.propertyMap.get(8)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+											  <li>
+                                                  <label class="checkbox">
+                                                      <input type="checkbox" name="userProperties" value="12" #if(${modifyUser.propertyMap.get(12)}) checked #end>自定义价格
+                                                  </label>
+												  <label>
+													  <input type="text" name="userProperties12" id="userProperties12" #if(${modifyUser.propertyMap.get(12)}) value="${modifyUser.propertyMap.get(12)}" #end placeholder="请输入属性名称" style="width: 120px;margin-left:5px;">
+												  </label>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                  </div>
+
+                                  <div class="control-group control-group-action">
+                                      <div class="controls">
+										  <button type="submit" style="margin-left:25%;" class="btn btn-primary">确定</button>
+										  <a class="btn"  href="javascript:history.go(-1);">取消</a>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <!--mod-add end--->
+
+          </div>
+         <!--content end-->
+
+     </div>
+     <script src="/static/plugins/validation/jquery.validate.min.js"></script>
+    <script src="/static/js/pages/admin/operation.js"></script>
+</body>
+</html>

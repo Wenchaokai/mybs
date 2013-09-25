@@ -1,0 +1,202 @@
+.data-container{
+    background-color: #fff;
+    zoom: 1;
+}
+.data-container:after{
+    content: '\20';
+    display: block;
+    overflow: hidden;
+    height: 0px;
+    clear: both;
+}
+#doc{
+   /* background-color: #1b4366;*/
+}
+
+.data-container .grid-main{
+    float: left;
+    width: 710px;
+    min-height: 400px;
+    padding-top: 16px;
+}
+.data-container .grid-sub{
+    float: right;
+    width: 270px;
+    min-height: 400px;
+    padding-top: 16px;
+}
+.mod-overview{
+    height: 120px;
+    overflow: hidden;
+    padding-left: 160px;
+    background: #ffbb42 url(../../img/pages/data/data.jpg) no-repeat 0px 0px;
+	color:#fff;
+}
+.mod-overview .header{
+    font-size: 16px;
+    padding-top: 30px;
+    height:30px;
+}
+.mod-overview .header span{
+    padding: 0px 4px;
+}
+.mod-overview table{
+    width:540px;
+	font-size:12px;
+}
+.mod-overview table .c1{
+    width: 190px;
+}
+.mod-overview table .c2{
+    width: 190px;
+}
+.mod-overview table em{
+    font-style: normal;
+	font-weight:bold;
+}
+.mod-overview table td{
+    color: #8d5f24;
+}
+.mod-overview table td em{
+    color: #e15a00;
+}
+.mod-detail{
+    height: 320px;
+}
+.mod-detail .header{
+    margin-top: 10px;
+    height: 50px;
+    color:#808080;
+    font-size: 12px;
+    width:710px;
+    line-height: 48px;
+    border-bottom: 2px solid #d7d7d7;
+}
+.mod-detail .header .title{
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0px;
+    padding-top: 4px;
+}
+.mod-detail .header .action{
+    float: right;
+}
+.mod-detail .header .action .select-date{
+    margin-bottom: 0px;
+    width: 130px;
+}
+.mod-detail #mod-detail-table-container{
+    height: 240px;
+}
+.mod-detail .loading{
+    background: transparent url("../../img/pages/data/loading.gif") center center;
+}
+.mod-detail table th{
+    height: 34px;
+
+    background-color: transparent;
+    text-align: left;
+    color: #868592;
+    border:0 none;
+    border-bottom: 1px solid #d7d7d7;
+    font-weight: normal;
+}
+.mod-detail table th.t1{
+    width: 190px;
+}
+.mod-detail table th.t2{
+     width: 170px;
+}
+.mod-detail table th.t3{
+     width: 170px;
+}
+.mod-detail table th.t4{
+
+}
+.mod-detail table td{
+    background-color: transparent;
+    text-align: left;
+    color: #868592;
+    border:0 none;
+    font-weight: bold
+    height: 24px;
+}
+.mod-detail table td.t{
+    font-weight: bold;
+    color: #9999a5;
+}
+.mod-detail table td em{
+    font-style: normal;
+    color:#ff7300;
+}
+.mod-detail table td span{
+    padding-left: 30px;
+    color:#333;
+    background: transparent url("../../img/pages/data/trend.png") no-repeat 14px -76px;
+}
+.mod-detail table td span.decline{
+    background-position: 14px -37px;
+}
+.mod-detail table td span.nochange{
+    background-position: -27px -93px;
+}
+.mod-detail .select-date{
+	height:25px;
+	line-height:25px;
+}
+
+.mod-detail-chart{
+    height: 400px;
+    margin-bottom: 32px;
+    border-top:2px solid #d7d7d7;
+    background-color: #2fb7b5;
+}
+.mod-live{
+    background-color: #2fb7b5;
+}
+.mod-live .header{
+    height: 62px;
+    background: transparent url("../../img/pages/data/ss.jpg") no-repeat 15px 20px;
+    color:#fff;
+    position: relative;
+    width:270px;
+}
+.mod-live .header span{
+    display: block;
+    position: absolute;
+    font-size: 14px;
+    left:46px;
+    top:23px;
+}
+.mod-live .content{
+
+}
+.mod-live .content ul{
+    margin: 0px;
+}
+.mod-live .content li{
+    width:248px;
+    height:32px;
+    line-height: 32px;
+    overflow: hidden;
+    padding-left: 22px;
+    font-size: 12px;
+    color:#155352;
+    list-style: none;
+    margin: 0px;
+}
+.mod-live .content li span{
+    color:#fff;
+}
+.mod-live .content li.first{
+    border-top:0 none;
+    height: 25px;
+    line-height: 20px;
+}
+.mod-enters .item{
+    height: 103px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+

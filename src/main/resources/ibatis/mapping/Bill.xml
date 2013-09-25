@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="billSpace">
+	<typeAlias alias="bill" type="com.best.domain.BillInfo" />
+
+	<resultMap class="bill" id="allProperties">
+		<result property="billId" column="id" />
+		<result property="billType" column="bill_type" />
+		<result property="billDate" column="bill_date" />
+		<result property="billStatus" column="bill_status"/>
+		<result property="billAccount" column="bill_account"/>
+		<result property="billWarehouseCode" column="bill_warehouse_code"/>
+		<result property="billWarehouseName" column="bill_warehouse_name"/>
+		<result property="billCustomerCode" column="bill_customer_code"/>
+		<result property="billCustomerName" column="bill_customer_name"/>
+		<result property="billSummaryPath" column="bill_summary_path"/>
+		<result property="billDetailPath" column="bill_detail_path"/>
+	</resultMap>
+	
+	<select id="GET_BILL_BY_ID" parameterClass="java.lang.Long" resultMap="allProperties">
+		<![CDATA[
+            SELECT 
+            	*
+            FROM 
+            	bills 
+            WHERE 
+            	id=#billId#
+        ]]>
+	</select>
+	
+	<update id="UPDATE_BILL_STATUS" parameterClass="java.util.Map">
+		<![CDATA[
+            UPDATE 
+            	bills 
+            SET 
+            	bill_status=#billStatus#
+            WHERE
+            	id=#billId#
+        ]]>
+	</update>
+	
+	<select id="GET_BILL_BY_PAGESIZE" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	*
+            FROM 
+            	bills
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="billCustomerCode">  
+                ( bill_customer_code=#billCustomerCode#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="billWareHouseCode">  
+                ( bill_warehouse_code=#billWareHouseCode#)  
+            </isNotNull>
+            <isNotNull prepend="AND" property="billType">  
+                ( bill_type=#billType#)  
+            </isNotNull> 
+            <isNotNull prepend="AND" property="startTime">  
+                ( bill_date>=#startTime#)  
+            </isNotNull>  
+             <isNotNull prepend="AND" property="endTime"> 
+             <![CDATA[
+                ( bill_date<=#endTime#)  
+             ]]>
+            </isNotNull> 
+          </dynamic>
+        <![CDATA[
+            ORDER BY 
+            	bill_date desc
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	
+	<select id="GET_BILLS_BY_PAGESIZE" parameterClass="java.util.Map" resultMap="allProperties">
+		<![CDATA[
+            SELECT
+            	*
+            FROM 
+            	bills
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="billCustomerCodes">
+            	 <iterate property="billCustomerCodes" open="(" close=")" conjunction="or">
+			          bill_customer_code=#billCustomerCodes[]#
+			     </iterate>
+            </isNotNull>  
+            <isNotNull prepend="AND" property="billWareHouseCodes">
+            	<iterate property="billWareHouseCodes" open="(" close=")" conjunction="or">
+			          bill_warehouse_code=#billWareHouseCodes[]#
+			     </iterate>
+            </isNotNull>
+            <isNotNull prepend="AND" property="billType">  
+                ( bill_type=#billType#)  
+            </isNotNull> 
+            <isNotNull prepend="AND" property="startTime">  
+                ( bill_date>=#startTime#)  
+            </isNotNull>  
+             <isNotNull prepend="AND" property="endTime"> 
+             <![CDATA[
+                ( bill_date<=#endTime#)  
+             ]]>
+            </isNotNull> 
+          </dynamic>
+        <![CDATA[
+            ORDER BY 
+            	bill_date desc
+            LIMIT 
+            	#startIndex#,#pageSize#
+        ]]>
+	</select>
+	
+	<select id="GET_BILL_BY_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	bills
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="billCustomerCode">  
+                ( bill_customer_code=#billCustomerCode#)  
+            </isNotNull>  
+            <isNotNull prepend="AND" property="billWareHouseCode">  
+                ( bill_warehouse_code=#billWareHouseCode#)  
+            </isNotNull>
+            <isNotNull prepend="AND" property="billType">  
+                ( bill_type=#billType#)  
+            </isNotNull> 
+            <isNotNull prepend="AND" property="startTime">  
+                ( bill_date>=#startTime#)  
+            </isNotNull>  
+             <isNotNull prepend="AND" property="endTime"> 
+             <![CDATA[
+                ( bill_date<=#endTime#)  
+             ]]>
+            </isNotNull> 
+        </dynamic>
+	</select>
+	
+	<select id="GET_BILLS_BY_TOTALSIZE" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		<![CDATA[
+            SELECT
+            	count(*)
+            FROM 
+            	bills
+        ]]>
+        <dynamic prepend="WHERE">  
+            <isNotNull prepend="AND" property="billCustomerCodes">
+            	 <iterate property="billCustomerCodes" open="(" close=")" conjunction="or">
+			          bill_customer_code=#billCustomerCodes[]#
+			     </iterate>
+            </isNotNull>  
+            <isNotNull prepend="AND" property="billWareHouseCodes">
+            	<iterate property="billWareHouseCodes" open="(" close=")" conjunction="or">
+			          bill_warehouse_code=#billWareHouseCodes[]#
+			     </iterate>
+            </isNotNull>
+            <isNotNull prepend="AND" property="billType">  
+                ( bill_type=#billType#)  
+            </isNotNull> 
+            <isNotNull prepend="AND" property="startTime">  
+                ( bill_date>=#startTime#)  
+            </isNotNull>  
+             <isNotNull prepend="AND" property="endTime"> 
+             <![CDATA[
+                ( bill_date<=#endTime#)  
+             ]]>
+            </isNotNull> 
+        </dynamic>
+	</select>
+	
+	
+	
+	<insert id="INSERT_BILL" parameterClass="bill">
+		<![CDATA[
+            INSERT INTO 
+            	bills (bill_type,bill_date,bill_account,bill_warehouse_code,bill_warehouse_name,bill_customer_code,bill_customer_name,bill_summary_path,bill_detail_path) 
+            VALUES 
+            	(#billType#,#billDate#, #billAccount#,#billWarehouseCode#,#billWarehouseName#,#billCustomerCode#,#billCustomerName#,#billSummaryPath#,#billDetailPath#)
+        ]]>
+	</insert>
+	
+	<insert id="UPDATE_BILL_INFO" parameterClass="bill">
+		<![CDATA[
+			UPDATE 
+				bills
+			SET
+				bill_type=#billType#,
+				bill_date=#billDate#,
+				bill_account=#billAccount#,
+				bill_warehouse_code=#billWarehouseCode#,
+				bill_warehouse_name=#billWarehouseName#,
+				bill_customer_code=#billCustomerCode#,
+				bill_customer_name=#billCustomerName#,
+				bill_summary_path=#billSummaryPath#,
+				bill_detail_path=#billDetailPath#
+			WHERE
+				id=#billId#
+        ]]>
+	</insert>
+	
+	<delete id="DELETE_BILL" parameterClass="java.lang.Long">
+		<![CDATA[
+            DELETE FROM 
+            	bills
+            WHERE 
+            	id=#billId#
+        ]]>
+	</delete>
+
+</sqlMap>

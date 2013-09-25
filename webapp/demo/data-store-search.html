@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>库存查询</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/lib/lib.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/topbar.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/header.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/footer.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/nav.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/module/ui.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/css/pages/data-store-search.css">
+    <script src="../static/js/lib/lib.js"></script>
+    <base target="_self"/>
+</head>
+<body>
+     <div class="doc" id="doc">
+          <div class="topbar" id="topbar">
+              <div class="layout">
+                    <div class="grid">
+                         <div class="mod-toolbar">
+                             <p>你好！<span class="user-name">方健华</span>&nbsp;&nbsp;<a href="./user-manage.html" target="_self" class="login">[账号管理]</a>&nbsp;&nbsp;<a href="./loginout.html" target="_self" class="login">[退出]</a></p>
+                         </div>
+                    </div>
+              </div>
+          </div>
+          <div class="header" id="header">
+              <div class="layout">
+                  <div class="grid">
+                      <div class="mod-masthead">
+                          <a href="./index.html"><img src="../static/img/logo.jpg" /></a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="content" id="content">
+               <div class="layout layout-nav">
+                   <div class="grid">
+                       <div class="mod-nav" id="mod-nav">
+                            <div class="content">
+                                <ul>
+                                    <li class="">
+                                        <a href="./index.html" target="_self">首页</a>
+                                    </li>
+                                    <li>
+                                        <a href="./order-index.html" target="_self">我要查订单</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="./data-index.html" target="_self">我要看数据</a>
+                                    </li>
+                                    <li>
+                                        <a href="./bill-index.html" target="_self">我要看账单</a>
+                                    </li>
+                                    <li>
+                                        <a href="./account-index.html" target="_self">我的账号</a>
+                                    </li>
+                                </ul>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="layout">
+                    <div class="grid">
+                        <div class="mod-guide">
+                             <div class="header">
+                                 <ul class="breadcrumb">
+                                     <li><a href="./data-index.html">首页</a> <span class="divider">/</span></li>
+                                     <li><a href="./data-index.html">我要看数据</a> <span class="divider">/</span></li>
+                                     <li class="active">库存查询</li>
+                                 </ul>
+                             </div>
+                        </div>
+                    </div>
+               </div>
+               <div class="layout">
+                   <div class="grid">
+                       <div class="mod-store-filter">
+                           <div class="header">
+                               <form class="form-horizontal form-oreder-search" method="post">
+                                   <div class="control-group">
+                                       <div class="controls">
+                                           <div class="field">
+                                               <label class="help-inline">请选择仓库：</label>
+                                               <select class="select-sku">
+                                                   <option>请选择仓库</option>
+                                               </select>
+                                           </div>
+                                           <div class="field">
+                                               <span class="help-inline">请选择客户：</span>
+                                               <select class="select-sku">
+                                                   <option>请选择客户</option>
+                                               </select>
+                                           </div>
+                                           <div class="field">
+                                               <span class="help-inline">请输入SKU编码：</span>
+                                               <input type="text" value="" placeholder="请输入SKU编码"/>
+                                           </div>
+                                           <div class="field">
+                                               <span class="help-inline">请输入SKU名称：</span>
+                                               <input type="text" value="" placeholder="请输入SKU名称"/>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="control-group">
+
+                                       <div class="controls">
+                                           <div class="field">
+                                               <label class="help-inline">请输入款式：</label>
+                                               <input type="text" value="" placeholder="请输入款式"/>
+                                           </div>
+                                           <div class="field">
+                                               <span class="help-inline">请输入颜色：</span>
+                                               <input type="text" value="" placeholder="请输入颜色"/>
+                                           </div>
+                                           <div class="field">
+                                               <span class="help-inline">请选择尺码：</span>
+                                               <select class="select-sku">
+                                                   <option>请选择尺码</option>
+                                               </select>
+                                           </div>
+                                           <div class="field">
+                                               <button type="submit" class="btn btn-primary">查询</button>
+                                               <a class="btn btn-success" href="#">导出</a>
+                                           </div>
+
+
+                                       </div>
+                                   </div>
+
+                               </form>
+                           </div>
+                            <div class="content">
+                                <table class="ui-table table-store-list">
+                                    <thead>
+                                    <tr>
+                                        <th class="">SKU编码</th>
+                                        <th class="">SKU名称</th>
+                                        <th class="">款式</th>
+                                        <th class="">颜色</th>
+                                        <th class="">尺码</th>
+                                        <th class="">所属客户</th>
+                                        <th class="">所在仓库</th>
+                                        <th class="">当前实时库存数</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0000000001</td>
+                                            <td>长裤/军绿/L</td>
+                                            <td>长裤</td>
+                                            <td>军绿</td>
+                                            <td>L</td>
+                                            <td>广州汇美服装有限公司</td>
+                                            <td>广州-石基仓</td>
+                                            <td>7409</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                       </div>
+                   </div>
+               </div>
+               <!--table end-->
+
+               <!--page start-->
+               <div class="layout">
+                   <div class="grid">
+                       <div class="mod-pages">
+                           <div class="content">
+
+                               <div class="pagination pagination-large pagination-right">
+                                   <ul>
+                                       <li class="disabled"><a href="javascrit:void(0)" target="_self">«</a></li>
+                                       <li><a href="javascrit:void(0)" target="_self">«</a></li>
+                                       <li class="active"><a href="javascrit:void(0)" target="_self">1</a></li>
+                                       <li><a href="#">1</a></li>
+                                       <li><a href="#">2</a></li>
+                                       <li><a href="#">3</a></li>
+                                       <li><a href="#">4</a></li>
+                                       <li><a href="#">5</a></li>
+                                       <li><a href="#">»</a></li>
+                                       <li class="disabled"><a href="javascrit:void(0)" target="_self">»</a></li>
+                                   </ul>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <!--page end-->
+
+
+
+          </div>
+         <!--content end-->
+
+          <div class="footer clearfix" id="footer">
+                <div class="layout">
+                    <div class="grid">
+                        <div class="mod-footer">
+                            <div class="content">
+                                <p>©2012 800best.com 版权所有 ICP证: 浙B2-20070189</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+
+     </div>
+    <script src="../static/plugins/beechart/flash.js"></script>
+    <script src="../static/js/pages/data.js"></script>
+</body>
+</html>
